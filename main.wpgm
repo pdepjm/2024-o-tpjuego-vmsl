@@ -5,10 +5,12 @@ import mueblesMapa.*
 import platos.*
 
 program RestauranteGame {
+  	game.width(100)
+  	game.height(50)
+  	game.cellSize(30)
 	game.title("Restaurante")
-	game.height(10)
-	game.width(10)
-	game.cellSize(100)
+
+	game.addVisualCharacter(mozo)
 
 	game.start()
 }
