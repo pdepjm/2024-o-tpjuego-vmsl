@@ -1,7 +1,7 @@
 import wollok.game.*
 
 object mesas {
-  var property mesasDisponibles = [[5, 5], [2, 4], [7, 6]]
+  var property mesasDisponibles = [[8, 8], [2, 2], [2, 8]]
   var property mesasOcupadas = []
   
   method ocuparMesa(mesa) {
@@ -16,8 +16,9 @@ object mesas {
 }
 
 class Cliente {
+  var property id = 0.randomUpTo(200000000).truncate(0)
   var property position = game.at(0, 0)
-  var property paciencia = 2000.randomUpTo(15000).truncate(0)
+  var property paciencia = 4000.randomUpTo(15000).truncate(0)
   
   method sentarseEnMesa() {
     position = game.at(

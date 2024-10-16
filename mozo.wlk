@@ -1,5 +1,5 @@
 object mozo{
-    var property position = game.center()
+    var property position = game.origin()
 
     method image() = "imagenMozo.png" 
 }
