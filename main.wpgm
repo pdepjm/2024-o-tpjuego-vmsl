@@ -5,7 +5,11 @@ import mueblesMapa.*
 import platos.*
 
 program RestauranteGame {
+  	game.width(100)
+  	game.height(50)
+  	game.cellSize(30)
 	game.title("Restaurante")
+<<<<<<< HEAD
 	game.height(10)
 	game.width(10)
 	game.cellSize(100)
@@ -24,6 +28,10 @@ program RestauranteGame {
 				
 				game.addVisual(cliente)
 				game.say(cliente, "!")			
+=======
+
+	game.addVisualCharacter(mozo)
+>>>>>>> origin/main
 
 /* Este onTick se encarga de eliminar al cliente y desocupar la mesa cuando se le acaba la paciencia */
 				game.onTick(
