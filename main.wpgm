@@ -9,6 +9,32 @@ program RestauranteGame {
 	game.height(10)
 	game.width(10)
 	game.cellSize(100)
+	/* Spawn de clientes en la posicion de la mesa si es que hay disponibles */
+	
+	
+	
+	game.onTick(
+		2000,
+		"spawnClientes",
+		{ if (mesas.mesasDisponibles().size() !== 0) {
+				const cliente = new Cliente()
+				cliente.sentarseEnMesa()
+				/* Crea un objeto nuevo de cliente y le asigna una mesa de las disponibles */
+				
+				
+				game.addVisual(cliente)
+				game.say(cliente, "!")			
 
+/* Este onTick se encarga de eliminar al cliente y desocupar la mesa cuando se le acaba la paciencia */
+				game.onTick(
+					cliente.paciencia(),
+					"pacienciaCliente",
+					{ 
+						mesas.desocuparMesa([cliente.position().x(), cliente.position().y()])
+						return game.removeVisual(cliente)
+					}
+				)
+			} }
+	)
 	game.start()
 }
