@@ -2,7 +2,7 @@ import platos.*
 
 object mozo{
 
-    var property bandeja = hamburguesa
+    var property bandeja = vacio
 
     var property position = game.origin()
 
