@@ -1,3 +1,7 @@
+object vacio {
+  
+}
+
 object hamburguesa{
 
     const puntaje = 10
