@@ -8,4 +8,6 @@ object mozo{
 
     method image() = "imagenMozo.png" 
 
+    method mostrarBandeja() = game.say(self, bandeja.image())
+
 }

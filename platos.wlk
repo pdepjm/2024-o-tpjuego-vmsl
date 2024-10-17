@@ -1,5 +1,5 @@
 object vacio {
-  
+  method image() = "platoVacio.png"
 }
 
 object hamburguesa{

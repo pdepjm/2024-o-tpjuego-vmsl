@@ -12,6 +12,7 @@ program RestauranteGame {
 	/* Spawn de clientes en la posicion de la mesa si es que hay disponibles */
 	game.boardGround("fnd.jpg")
 	game.addVisualCharacter(mozo)
+	keyboard.space().onPressDo{mozo.mostrarBandeja()}
 	game.addVisualCharacter(mesa1)
 	game.addVisualCharacter(mesa2)
 	game.addVisualCharacter(mesa3)
