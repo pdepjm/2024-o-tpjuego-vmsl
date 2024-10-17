@@ -10,8 +10,13 @@ program RestauranteGame {
 	game.cellSize(100)
 	game.title("Restaurante")
 	/* Spawn de clientes en la posicion de la mesa si es que hay disponibles */
-
+	game.boardGround("fnd.jpg")
 	game.addVisualCharacter(mozo)
+	game.addVisualCharacter(mesa1)
+	game.addVisualCharacter(mesa2)
+	game.addVisualCharacter(mesa3)
+	game.addVisualCharacter(mesa4)
+	game.addVisualCharacter(mesa5)
 	/* Spawn de clientes en la posicion de la mesa si es que hay disponibles */
 	
 	game.onTick(
@@ -20,12 +25,11 @@ program RestauranteGame {
 		{ if (mesas.mesasDisponibles().size() !== 0) {
 				const cliente = new Cliente()
 				cliente.sentarseEnMesa()
-				/* Crea un objeto nuevo de cliente y le asigna una mesa de las disponibles */
+				// Crea un objeto nuevo de cliente y le asigna una mesa de las disponibles 
 
 				game.addVisual(cliente)
 				game.say(cliente, "!")
-				/* Este onTick se encarga de eliminar al cliente y desocupar la mesa cuando se le acaba la paciencia */
-
+				// Este onTick se encarga de eliminar al cliente y desocupar la mesa cuando se le acaba la paciencia 
 				game.onTick(
 					cliente.paciencia(),
 					"pacienciaCliente/" + cliente.id(),
@@ -35,7 +39,7 @@ program RestauranteGame {
 					}
 				)
 			} }
-	) /* Eventos de Teclado: Interaccion con cliente */
+	) // Eventos de Teclado: Interaccion con cliente 
 	
 	game.whenCollideDo(
 		mozo,
@@ -44,6 +48,11 @@ program RestauranteGame {
 				game.say(mozo, "Hola! " + cliente.id())
 			 }
 	)
-	
+	/*game.addVisualCharacter(mesa1)
+	game.addVisualCharacter(mesa2)
+	game.addVisualCharacter(mesa3)
+	game.addVisualCharacter(mesa4)
+	game.addVisualCharacter(mesa5)*/
+
 	game.start()
 }
