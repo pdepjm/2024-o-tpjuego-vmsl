@@ -1,4 +1,5 @@
 import wollok.game.*
+import platos.*
 
 object mesas {
   var property mesasDisponibles = [[8, 8], [2, 2], [2, 8]]
@@ -20,6 +21,9 @@ class Cliente {
   var property position = game.at(0, 0)
   var property paciencia = 4000.randomUpTo(15000).truncate(0)
   
+  //agrego esto para probar metodos de agarrar y entregar
+  var property plato = hamburguesa
+
   method sentarseEnMesa() {
     position = game.at(
       mesas.mesasDisponibles().get(0).get(0),
@@ -30,4 +34,9 @@ class Cliente {
   }
   method text() = paciencia.toString()
   method image() = "cliente-1.png"
+  
+  //metodo provisorio
+  method recibirPlato(){
+    console.println("cliente recibio el plato")
+  }
 }

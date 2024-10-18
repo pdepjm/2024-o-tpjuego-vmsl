@@ -43,7 +43,7 @@ program RestauranteGame {
 	) // Eventos de Teclado: Interaccion con cliente 
 	
 	game.whenCollideDo(
-		mozo,
+	mozo,
 		{ cliente =>  
 				console.println("hola")
 				game.say(mozo, "Hola! " + cliente.id())
@@ -54,6 +54,18 @@ program RestauranteGame {
 	game.addVisualCharacter(mesa3)
 	game.addVisualCharacter(mesa4)
 	game.addVisualCharacter(mesa5)*/
+
+	//	TECLADO
+
+	//movimiento
+	keyboard.up().onPressDo { mozo.move(mozo.position().up(1)) }
+	keyboard.down().onPressDo { mozo.move(mozo.position().down(1)) }
+	keyboard.left().onPressDo { mozo.move(mozo.position().left(1)) }
+	keyboard.right().onPressDo { mozo.move(mozo.position().right(1)) }
+	
+	//agarrar y entregar plato
+	keyboard.h().onPressDo { mozo.agarrar(hamburguesa) }
+	keyboard.enter().onPressDo { mozo.entregar() }
 
 	game.start()
 }
