@@ -1,5 +1,20 @@
 import platos.*
 import clientes.*
+class Dialogo {
+    const position
+    const duration
+    //const text
+    const image
+    
+    method position() = position
+    //method text() = text
+    method image() = image
+    method mostrar() {
+        game.addVisual(self)
+        game.schedule(duration, { game.removeVisual(self)})
+    }
+}
+
 object mozo{
 
     var property bandeja = vacio
@@ -11,7 +26,12 @@ object mozo{
 
     method image() = "imagenMozo.png" 
 
-    method mostrarBandeja() = game.say(self, bandeja.image())
+    method mostrarBandeja() {
+        const dialogo = new Dialogo(position = game.at(self.position().x() + 1.15, self.position().y() + 3), 
+                                    duration = 1000, 
+                                    image = bandeja.image()) // Dura 2 segundos
+        dialogo.mostrar()
+    } 
 
     //de esta forma, puede que distintos nombres de metodos a llamar
     method sumarPuntos(cliente,plato) {
@@ -22,10 +42,6 @@ object mozo{
     method restarPuntos() {
         puntaje = puntaje - 500
     }
-
-    method move(nuevaPosicion) {
-		self.position(nuevaPosicion)
-	}
 
     method agarrar (plato){
         const posicion = self.position()

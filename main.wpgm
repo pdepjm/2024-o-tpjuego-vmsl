@@ -12,7 +12,7 @@ program RestauranteGame {
 	/* Spawn de clientes en la posicion de la mesa si es que hay disponibles */
 	game.boardGround("fnd.jpg")
 	game.addVisualCharacter(mozo)
-	keyboard.space().onPressDo{mozo.mostrarBandeja()}
+
 	game.addVisualCharacter(mesa1)
 	game.addVisualCharacter(mesa2)
 	game.addVisualCharacter(mesa3)
@@ -56,13 +56,8 @@ program RestauranteGame {
 	game.addVisualCharacter(mesa5)*/
 
 	//	TECLADO
-
-	//movimiento
-	keyboard.up().onPressDo { mozo.move(mozo.position().up(1)) }
-	keyboard.down().onPressDo { mozo.move(mozo.position().down(1)) }
-	keyboard.left().onPressDo { mozo.move(mozo.position().left(1)) }
-	keyboard.right().onPressDo { mozo.move(mozo.position().right(1)) }
-	
+	//Mostrar contenido de la bandeja
+	keyboard.space().onPressDo{mozo.mostrarBandeja()}
 	//agarrar y entregar plato
 	keyboard.h().onPressDo { mozo.agarrar(hamburguesa) }
 	keyboard.enter().onPressDo { mozo.entregar() }

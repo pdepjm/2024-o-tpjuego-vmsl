@@ -1,5 +1,6 @@
 object vacio {
-  method image() = "platoVacio.png"
+  method image() = "platoV3.png"
+
 }
 
 object hamburguesa{
@@ -8,5 +9,5 @@ object hamburguesa{
     method puntaje() = puntaje 
     const property position = game.at(5, 0)
 
-    method image() = "hamgurguesa.png"
+    method image() = "hamburguesaV2.png"
 }
