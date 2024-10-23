@@ -17,7 +17,7 @@ class Dialogo {
 
 object mozo{
 
-    var property bandeja = vacio
+    var property bandeja = hamburguesa
 
     var property position = game.origin()
 
@@ -27,9 +27,9 @@ object mozo{
     method image() = "imagenMozo.png" 
 
     method mostrarBandeja() {
-        const dialogo = new Dialogo(position = game.at(self.position().x() + 1.15, self.position().y() + 3), 
+        const dialogo = new Dialogo(position = game.at(self.position().x() + 1, self.position().y() + 2), 
                                     duration = 1000, 
-                                    image = bandeja.image()) // Dura 2 segundos
+                                    image = bandeja.imagenDialogo()) // Dura 2 segundos
         dialogo.mostrar()
     } 
 
