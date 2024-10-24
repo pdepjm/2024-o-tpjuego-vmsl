@@ -8,7 +8,7 @@ UTN - Facultad Regional Buenos Aires - Materia Paradigmas de Programación
 - Lucía García
 - Malena Ochoa
 - Valentina Ortigosa
- 
+- Matías Valtolina
 
 ## Capturas 
 
