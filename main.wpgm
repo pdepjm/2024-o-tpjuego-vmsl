@@ -5,19 +5,13 @@ import platos.*
 import mozo.*
 
 
+
 program RestauranteGame {
 	configuracion.setGeneral()
-	configuracion.setKeyboard() 
+	configuracion.setKeyboard()
 	configuracion.setVisuals()
 	spawnerClientes.comenzar()
-	
 	/* Spawn de clientes en la posicion de la mesa si es que hay disponibles */
-	game.whenCollideDo(
-		mozo,
-		{ cliente =>
-			console.println("hola")
-			return game.say(mozo, "Hola! " + cliente.id())
-		}
-	)
+
 	game.start()
 }

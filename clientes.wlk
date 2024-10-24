@@ -1,21 +1,6 @@
 import wollok.game.*
 import platos.*
-
-object mesas {
-  var property mesasDisponibles = [[8, 8], [2, 2], [2, 8]]
-  var property mesasOcupadas = []
-  
-  method ocuparMesa(mesa) {
-    mesasOcupadas.add(mesa)
-    mesasDisponibles.remove(mesa)
-  }
-  
-  method desocuparMesa(mesa) {
-    mesasOcupadas.remove(mesa)
-    mesasDisponibles.add(mesa)
-  }
-}
-
+import mueblesMapa.*
 class Cliente {
   var property id = 0.randomUpTo(200000000).truncate(0)
   var property position = game.at(0, 0)
@@ -23,13 +8,12 @@ class Cliente {
   //agrego esto para probar metodos de agarrar y entregar
   var property plato = hamburguesa
   
-  method sentarseEnMesa() {
+  method sentarseEnMesa(mesa) {
     position = game.at(
-      mesas.mesasDisponibles().get(0).get(0),
-      mesas.mesasDisponibles().get(0).get(1)
+      mesa.position().x(),
+      mesa.position().y()
     )
-    const mesa = mesas.mesasDisponibles().head()
-    mesas.ocuparMesa(mesa)
+    mesa.ocuparMesa()
   }
   
   method text() = paciencia.toString()
@@ -48,20 +32,20 @@ object spawnerClientes {
     game.onTick(
       2000,
       "spawnClientes",
-      { if (mesas.mesasDisponibles().size() !== 0) {
+      { 
+        const mesasDisponibles = mesas.filter({mesa => not mesa.estaOcupada()})
+        if (mesasDisponibles.size() !== 0) {
+          const mesa = mesasDisponibles.head()
           const cliente = new Cliente()
-          cliente.sentarseEnMesa()
+          cliente.sentarseEnMesa(mesa)
           // Crea un objeto nuevo de cliente y le asigna una mesa de las disponibles 
           game.addVisual(cliente)
-          game.say(cliente, "!")
           // Este onTick se encarga de eliminar al cliente y desocupar la mesa cuando se le acaba la paciencia 
           game.onTick(
             cliente.paciencia(),
             "pacienciaCliente/" + cliente.id(),
             { 
-              mesas.desocuparMesa(
-                [cliente.position().x(), cliente.position().y()]
-              )
+              mesa.desocuparMesa()
               return game.removeVisual(cliente)
             }
           )

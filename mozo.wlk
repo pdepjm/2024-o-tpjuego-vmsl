@@ -3,11 +3,11 @@ import clientes.*
 class Dialogo {
     const position
     const duration
-    //const text
+    const text = ""
     const image
     
     method position() = position
-    //method text() = text
+    method text() = text
     method image() = image
     method mostrar() {
         game.addVisual(self)

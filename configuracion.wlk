@@ -12,12 +12,7 @@ object configuracion {
 	
 	method setVisuals() {
 		game.boardGround("fnd.jpg")
-		
-		game.addVisualCharacter(mesa1)
-		game.addVisualCharacter(mesa2)
-		game.addVisualCharacter(mesa3)
-		game.addVisualCharacter(mesa4)
-		game.addVisualCharacter(mesa5)
+		mesas.forEach({mesa => game.addVisual(mesa)})
 		game.addVisualCharacter(mozo)
 	}
 	
