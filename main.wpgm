@@ -1,66 +1,23 @@
 import wollok.game.*
 import clientes.*
-import mozo.*
-import mueblesMapa.*
+import configuracion.*
 import platos.*
+import mozo.*
+
 
 program RestauranteGame {
-	game.width(15)
-	game.height(15)
-	game.cellSize(100)
-	game.title("Restaurante")
-	/* Spawn de clientes en la posicion de la mesa si es que hay disponibles */
-	game.boardGround("fnd.jpg")
-	game.addVisualCharacter(mozo)
-
-	game.addVisualCharacter(mesa1)
-	game.addVisualCharacter(mesa2)
-	game.addVisualCharacter(mesa3)
-	game.addVisualCharacter(mesa4)
-	game.addVisualCharacter(mesa5)
-	/* Spawn de clientes en la posicion de la mesa si es que hay disponibles */
+	configuracion.setGeneral()
+	configuracion.setKeyboard() 
+	configuracion.setVisuals()
+	spawnerClientes.comenzar()
 	
-	game.onTick(
-		2000,
-		"spawnClientes",
-		{ if (mesas.mesasDisponibles().size() !== 0) {
-				const cliente = new Cliente()
-				cliente.sentarseEnMesa()
-				// Crea un objeto nuevo de cliente y le asigna una mesa de las disponibles 
-
-				game.addVisual(cliente)
-				game.say(cliente, "!")
-				// Este onTick se encarga de eliminar al cliente y desocupar la mesa cuando se le acaba la paciencia 
-				game.onTick(
-					cliente.paciencia(),
-					"pacienciaCliente/" + cliente.id(),
-					{ 
-						mesas.desocuparMesa([cliente.position().x(), cliente.position().y()])
-						return game.removeVisual(cliente)
-					}
-				)
-			} }
-	) // Eventos de Teclado: Interaccion con cliente 
-	
+	/* Spawn de clientes en la posicion de la mesa si es que hay disponibles */
 	game.whenCollideDo(
-	mozo,
-		{ cliente =>  
-				console.println("hola")
-				game.say(mozo, "Hola! " + cliente.id())
-			 }
+		mozo,
+		{ cliente =>
+			console.println("hola")
+			return game.say(mozo, "Hola! " + cliente.id())
+		}
 	)
-	/*game.addVisualCharacter(mesa1)
-	game.addVisualCharacter(mesa2)
-	game.addVisualCharacter(mesa3)
-	game.addVisualCharacter(mesa4)
-	game.addVisualCharacter(mesa5)*/
-
-	//	TECLADO
-	//Mostrar contenido de la bandeja
-	keyboard.space().onPressDo{mozo.mostrarBandeja()}
-	//agarrar y entregar plato
-	keyboard.h().onPressDo { mozo.agarrar(hamburguesa) }
-	keyboard.enter().onPressDo { mozo.entregar() }
-
 	game.start()
 }
