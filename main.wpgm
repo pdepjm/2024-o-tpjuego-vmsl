@@ -4,8 +4,6 @@ import configuracion.*
 import platos.*
 import mozo.*
 
-
-
 program RestauranteGame {
 	configuracion.setGeneral()
 	configuracion.setKeyboard()

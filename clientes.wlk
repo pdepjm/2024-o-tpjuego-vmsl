@@ -11,7 +11,7 @@ class Cliente {
   
   method sentarseEnMesa(mesa) {
     position = game.at(mesa.position().x(), mesa.position().y())
-    mesa.ocuparMesa()
+    mesa.ocuparMesa(self)
   }
   
   method text() = paciencia.toString()

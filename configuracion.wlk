@@ -23,6 +23,6 @@ object configuracion {
 		//agarrar y entregar plato
 		
 		keyboard.h().onPressDo({ mozo.agarrar(hamburguesa) })
-		keyboard.enter().onPressDo({ mozo.entregar() })
+		keyboard.f().onPressDo({ mozo.entregar() })
 	}
 }

@@ -3,12 +3,14 @@ class Mesa {
   var property image
   var property position
   var property estaOcupada = false
-  
-  method ocuparMesa() {
+  var property clienteSentado = null 
+  method ocuparMesa(cliente) {
     estaOcupada = true
+    clienteSentado = cliente
   }
   method desocuparMesa() {
     estaOcupada = false
+    clienteSentado = null
   }
 }
 
