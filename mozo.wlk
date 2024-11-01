@@ -1,7 +1,7 @@
 import platos.*
 import clientes.*
-
 import mueblesMapa.*
+
 const hamburguesa = new Hamburguesa(puntaje = 10, position = game.at(5, 0)) //pedido de una hamburguesa
 const sandwich = new Sandwich(puntaje = 8, position = game.at(2, 5))
 const ensalada = new Ensalada(puntaje = 12, position = game.at(7, 5))
