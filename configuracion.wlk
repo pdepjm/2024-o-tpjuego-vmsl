@@ -4,7 +4,7 @@ import platos.*
 
 object configuracion {
 	method setGeneral() {
-		game.width(15)
+		game.width(30)
 		game.height(15)
 		game.cellSize(100)
 		game.title("Wollok Dinner")
