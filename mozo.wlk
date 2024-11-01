@@ -1,5 +1,10 @@
 import platos.*
 import clientes.*
+
+const hamburguesa = new Hamburguesa(puntaje = 10, position = game.at(5, 0)) //pedido de una hamburguesa
+const sandwich = new Sandwich(puntaje = 8, position = game.at(2, 5))
+const ensalada = new Ensalada(puntaje = 12, position = game.at(7, 5))
+const waffle = new Ensalada(puntaje = 11, position = game.at(7, 10))
 class Dialogo {
     const position
     const duration

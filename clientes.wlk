@@ -2,12 +2,17 @@ import wollok.game.*
 import platos.*
 import mueblesMapa.*
 
+const pedHamburguesa = new Hamburguesa(puntaje = 10, position = game.at(5, 0)) //pedido de una hamburguesa
+const pedSandwich = new Sandwich(puntaje = 8, position = game.at(2, 5))
+const pedEnsalada = new Ensalada(puntaje = 12, position = game.at(7, 5))
+const pedWaffle = new Ensalada(puntaje = 11, position = game.at(7, 10))
+
 class Cliente {
   var property id = 0.randomUpTo(200000000).truncate(0)
   var property position = game.at(0, 0)
   var property paciencia = 4000.randomUpTo(15000).truncate(0)
   //agrego esto para probar metodos de agarrar y entregar
-  const posiblesPlatos = #{hamburguesa, ensalada, waffle, sandwich}
+  const posiblesPlatos = #{pedHamburguesa, pedEnsalada, pedWaffle, pedSandwich}
   var property plato = posiblesPlatos.anyOne()
   
   method sentarseEnMesa(mesa) {

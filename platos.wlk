@@ -2,7 +2,20 @@ object vacio {
   method imagenDialogo() = "vacioDialogo.png"
 
 }
+class Comida{
+  const property puntaje
+  const property position 
 
+  method imagenDialogo()
+}
+
+class Hamburguesa inherits Comida{
+
+  override method imagenDialogo() = "hamburguesaDialogo.png"
+}
+
+
+/*
 object hamburguesa{
 
     const puntaje = 10
@@ -11,15 +24,20 @@ object hamburguesa{
 
     method imagenDialogo() = "hamburguesaDialogo.png"
 }
-
-object sandwich{
-
+*/
+class Sandwich inherits Comida{
+  override method imagenDialogo() = "sandwichDialogo.png" //Agregar imagen
 }
 
-object ensalada{
 
+class Ensalada inherits Comida{
+  override method imagenDialogo() = "ensaladaDialogo.png" //Agregar imagen
 }
 
-object waffle{
 
+
+class Waffle inherits Comida{
+  override method imagenDialogo() = "waffleDialogo.png" //Agregar imagen
 }
+
+
