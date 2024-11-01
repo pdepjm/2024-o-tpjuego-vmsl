@@ -24,11 +24,14 @@ object mozo{
     var property puntaje = 0
 
 
-    method image() = "imagenMozo.png" 
+    method image() = "imagenMozo.png"
+
+    method posicionDialogoX() = self.position().x() + 1
+    method posicionDialogoY() = self.position().y() + 2
 
     method mostrarBandeja() {
-        const dialogo = new Dialogo(position = game.at(self.position().x() + 1, self.position().y() + 2), 
-                                    duration = 1000, 
+        const dialogo = new Dialogo(position = game.at(self.posicionDialogoX(), self.posicionDialogoY()), 
+                                    duration = 1000,
                                     image = bandeja.imagenDialogo()) // Dura 2 segundos
         dialogo.mostrar()
     } 
