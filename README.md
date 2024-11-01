@@ -1,12 +1,14 @@
-#  (reemplazar nombre de juego acá) 
+#  Wollok Diner 
 
 UTN - Facultad Regional Buenos Aires - Materia Paradigmas de Programación
 
 ## Equipo de desarrollo: 
 
-- completar...
-- completar...
- 
+- Santiago Gimenez
+- Lucía García
+- Malena Ochoa
+- Valentina Ortigosa
+- Matías Valtolina
 
 ## Capturas 
 
@@ -14,7 +16,7 @@ UTN - Facultad Regional Buenos Aires - Materia Paradigmas de Programación
 
 ## Reglas de Juego / Instrucciones
 
-(completar...)
+aa
 
 ## Controles:
 
