@@ -11,3 +11,15 @@ object hamburguesa{
 
     method imagenDialogo() = "hamburguesaDialogo.png"
 }
+
+object sandwich{
+
+}
+
+object ensalada{
+
+}
+
+object waffle{
+
+}

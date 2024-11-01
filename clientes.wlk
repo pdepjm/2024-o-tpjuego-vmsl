@@ -7,7 +7,8 @@ class Cliente {
   var property position = game.at(0, 0)
   var property paciencia = 4000.randomUpTo(15000).truncate(0)
   //agrego esto para probar metodos de agarrar y entregar
-  var property plato = hamburguesa
+  const posiblesPlatos = #{hamburguesa, ensalada, waffle, sandwich}
+  var property plato = posiblesPlatos.anyOne()
   
   method sentarseEnMesa(mesa) {
     position = game.at(mesa.position().x(), mesa.position().y())
