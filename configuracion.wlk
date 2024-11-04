@@ -2,6 +2,26 @@ import mueblesMapa.*
 import mozo.*
 import platos.*
 
+class Estrella {
+	var property image = "star.png"
+	var property position
+}
+
+const vidas = [
+	new Estrella(position = game.at(29, 14)),
+	new Estrella(position = game.at(28, 14)),
+	new Estrella(position = game.at(27, 14))
+]
+
+object vida {
+	method perderVida() {
+		if (vidas.size() > 0) {
+			game.removeVisual(vidas.head())
+			vidas.remove(vidas.head())
+		}
+	}
+}
+
 object configuracion {
 	method setGeneral() {
 		game.width(30)
@@ -12,7 +32,8 @@ object configuracion {
 	
 	method setVisuals() {
 		game.boardGround("fnd.jpg")
-		mesas.forEach({mesa => game.addVisual(mesa)})
+		mesas.forEach({ mesa => game.addVisual(mesa) })
+		vidas.forEach({ vida => game.addVisual(vida) })
 		game.addVisualCharacter(mozo)
 	}
 	
@@ -23,6 +44,6 @@ object configuracion {
 		//agarrar y entregar plato
 		
 		keyboard.h().onPressDo({ mozo.agarrar(hamburguesa) })
-		keyboard.f().onPressDo({ mozo.entregar() })
+		keyboard.f().onPressDo({ mozo.interactuarConCliente() })
 	}
 }

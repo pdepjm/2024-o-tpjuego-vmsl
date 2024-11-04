@@ -2,11 +2,6 @@ import platos.*
 import clientes.*
 import mueblesMapa.*
 
-const hamburguesa = new Hamburguesa(puntaje = 10, position = game.at(5, 0)) //pedido de una hamburguesa
-const sandwich = new Sandwich(puntaje = 8, position = game.at(2, 5))
-const ensalada = new Ensalada(puntaje = 12, position = game.at(7, 5))
-const waffle = new Ensalada(puntaje = 11, position = game.at(7, 10))
-
 class Dialogo {
   const position
   const duration
@@ -26,7 +21,7 @@ class Dialogo {
 }
 
 object mozo {
-  var property bandeja = hamburguesa
+  var property bandeja = null
   var property position = game.origin()
   var property puntaje = 0
   
@@ -37,12 +32,14 @@ object mozo {
   method posicionDialogoY() = self.position().y() + 2
   
   method mostrarBandeja() {
-    const dialogo = new Dialogo(
-      position = game.at(self.posicionDialogoX(), self.posicionDialogoY()),
-      duration = 1000,
-      image = bandeja.imagenDialogo()
-    ) // Dura 2 segundos
-    dialogo.mostrar()
+    if (self.bandeja() !== null) {
+      const dialogo = new Dialogo(
+        position = game.at(self.posicionDialogoX(), self.posicionDialogoY()),
+        duration = 1000,
+        image = bandeja.imagenDialogo()
+      ) // Dura 2 segundos
+      dialogo.mostrar()
+    }
   }
   
   //de esta forma, puede que distintos nombres de metodos a llamar
@@ -76,25 +73,52 @@ object mozo {
     { null }
   ) // Hacer mas declarativa esta funcion
   
-  method entregar() {
+  method entregarPlato(cliente) {
+    // Chequea si el plato que quiere el cliente es el mismo que el que tenemos en la bandeja
+    if (cliente.plato() == self.bandeja()) {
+      game.removeTickEvent(
+        "pacienciaCliente/" + self.mesaCercana().clienteSentado().id()
+      )
+      cliente.estado(2)
+      console.println("Plato entregado")
+      game.schedule(
+        0,
+        { 
+          game.removeVisual(self.mesaCercana().clienteSentado())
+          return self.mesaCercana().desocuparMesa()
+        }
+      )
+    }
+    self.bandeja(null)
+  }
+  
+  method tomarPedido(cliente) {
+    const platoElegido = platos.anyOne()
+    cliente.estado(1)
+    cliente.plato(platoElegido)
+    const dialogo = new Dialogo(
+      position = game.at(
+        cliente.position().x() + 1,
+        cliente.position().y() + 2
+      ),
+      duration = 1500,
+      image = platoElegido.imagenDialogo()
+    )
+    dialogo.mostrar()
+  }
+  
+  method interactuarConCliente() {
     // Chequea que tengamos un cliente cerca
-    if ((self.mesaCercana() !== null) && (self.bandeja() !== null)) {
-      // Chequea si el plato que quiere el cliente es el mismo que el que tenemos en la bandeja
-      if (self.mesaCercana().clienteSentado().plato() == self.bandeja()) {
-        game.removeTickEvent(
-          "pacienciaCliente/" + self.mesaCercana().clienteSentado().id()
-        )
-        console.println(self.mesaCercana())
-        game.schedule(
-          1500,
-          { 
-            game.removeVisual(self.mesaCercana().clienteSentado())
-            return self.mesaCercana().desocuparMesa()
-          }
-        )
+    if ((self.mesaCercana() !== null)) {
+      const clienteCercano = self.mesaCercana().clienteSentado()
+      // El cliente esta esperando que le tomen el pedido
+      if (clienteCercano.estado() == 0) {
+        self.tomarPedido(clienteCercano)
+      } else if (clienteCercano.estado() == 1  && self.bandeja() !== null) {
+          // El cliente esta esperando que le tomen el pedido
+          self.entregarPlato(clienteCercano)
       }
     }
-    return
   }
 }
 

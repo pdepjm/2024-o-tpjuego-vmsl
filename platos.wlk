@@ -26,18 +26,24 @@ object hamburguesa{
 }
 */
 class Sandwich inherits Comida{
-  override method imagenDialogo() = "sandwichDialogo.png" //Agregar imagen
+  override method imagenDialogo() = "dialogoSandwich.png" //Agregar imagen
 }
 
 
 class Ensalada inherits Comida{
-  override method imagenDialogo() = "ensaladaDialogo.png" //Agregar imagen
+  override method imagenDialogo() = "dialogoEnsalada.png" //Agregar imagen
 }
 
 
 
 class Waffle inherits Comida{
-  override method imagenDialogo() = "waffleDialogo.png" //Agregar imagen
+  override method imagenDialogo() = "dialogoWaffle.png" //Agregar imagen
 }
 
 
+const hamburguesa = new Hamburguesa(puntaje = 10, position = game.at(5, 0)) //pedido de una hamburguesa
+const sandwich = new Sandwich(puntaje = 8, position = game.at(2, 5))
+const ensalada = new Ensalada(puntaje = 12, position = game.at(7, 5))
+const waffle = new Ensalada(puntaje = 11, position = game.at(7, 10))
+
+const platos = [hamburguesa]

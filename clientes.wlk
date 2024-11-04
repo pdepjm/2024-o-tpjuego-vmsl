@@ -1,14 +1,19 @@
 import wollok.game.*
 import platos.*
 import mueblesMapa.*
-
+import configuracion.vida
 class Cliente {
   var property id = 0.randomUpTo(200000000).truncate(0)
   var property position = game.at(0, 0)
-  var property paciencia = 4000.randomUpTo(15000).truncate(0)
+  var property paciencia = 10000.randomUpTo(15000).truncate(0)
   //agrego esto para probar metodos de agarrar y entregar
   var property plato = hamburguesa
-  
+  // Estados:
+  // 0 -> Esperando a ser atendido
+  // 1 -> Esperando plato de comida
+  // 2 -> Comiendo
+  var property estado = 0
+
   method sentarseEnMesa(mesa) {
     position = game.at(mesa.position().x(), mesa.position().y())
     mesa.ocuparMesa(self)
@@ -17,11 +22,6 @@ class Cliente {
   method text() = paciencia.toString()
   
   method image() = "cliente-1.png"
-  
-  //metodo provisorio
-  method recibirPlato() {
-    console.println("cliente recibio el plato")
-  }
 }
 
 object spawnerClientes {
@@ -31,6 +31,7 @@ object spawnerClientes {
       "pacienciaCliente/" + cliente.id(),
       { 
         mesa.desocuparMesa()
+        vida.perderVida()
         return game.removeVisual(cliente)
       }
     )
@@ -52,10 +53,11 @@ object spawnerClientes {
           // Crea un objeto nuevo de cliente y le asigna una mesa de las disponibles 
           
           game.addVisual(cliente)
-          // Este onTick se encarga de eliminar al cliente y desocupar la mesa cuando se le acaba la paciencia 
+          // Este onTick se encarga de eliminar al cliente y desocupar la mesa cuando se le acaba la paciencia    
+          
           self.pacienciaHandler(cliente, mesa)
         }
       }
-    ) // Eventos de Teclado: Interaccion con cliente 
+    )
   }
 }

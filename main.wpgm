@@ -4,12 +4,14 @@ import configuracion.*
 import platos.*
 import mozo.*
 
+
 program RestauranteGame {
 	configuracion.setGeneral()
 	configuracion.setKeyboard()
 	configuracion.setVisuals()
 	spawnerClientes.comenzar()
 	/* Spawn de clientes en la posicion de la mesa si es que hay disponibles */
-
+	
+	
 	game.start()
 }
