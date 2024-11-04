@@ -31,9 +31,10 @@ object configuracion {
 	}
 	
 	method setVisuals() {
-		game.boardGround("fnd.jpg")
+		game.boardGround("fondo.jpg")
 		mesas.forEach({ mesa => game.addVisual(mesa) })
 		vidas.forEach({ vida => game.addVisual(vida) })
+		platos.forEach({plato => game.addVisual(plato)})
 		game.addVisualCharacter(mozo)
 	}
 	
