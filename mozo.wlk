@@ -124,12 +124,13 @@ object mozo {
 
 object puntaje {
   var property puntaje = 0
-  var property image = 0
-  const position = game.center()
+  //var property image = 0
+  const property position = game.at(0, 14)
   
   method cambiarPuntaje(nuevoPuntaje) {
-    image = puntaje + nuevoPuntaje
+    puntaje += nuevoPuntaje
   }
   
-  method text() = image.toString()
+  method text() = puntaje.toString()
+  method textColor() = "FFFFFFFF" //Color blanco
 }

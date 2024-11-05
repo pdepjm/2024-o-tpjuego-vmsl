@@ -32,6 +32,7 @@ object configuracion {
 	
 	method setVisuals() {
 		game.boardGround("fondo.jpg")
+		game.addVisual(puntaje)
 		mesas.forEach({ mesa => game.addVisual(mesa) })
 		vidas.forEach({ vida => game.addVisual(vida) })
 		platos.forEach({plato => game.addVisual(plato)})
@@ -43,9 +44,12 @@ object configuracion {
 		//	TECLADO
 		//Mostrar contenido de la bandeja
 		keyboard.space().onPressDo({ mozo.mostrarBandeja() })
-		//agarrar y entregar plato
-		
+		//Agarrar platos(Mozo)
 		keyboard.h().onPressDo({ mozo.agarrar(hamburguesa) })
+		keyboard.s().onPressDo({mozo.agarrar(sandwich)})
+		keyboard.e().onPressDo({mozo.agarrar(ensalada)})
+		keyboard.w().onPressDo({mozo.agarrar(waffle)})
+		//Interaccion con el cliente
 		keyboard.f().onPressDo({ mozo.interactuarConCliente() })
 	}
 }
