@@ -22,7 +22,7 @@ class Dialogo {
 
 object mozo {
   var property bandeja = null
-  var property position = game.origin()
+  var property position = game.at(1,3)
   var property puntaje = 0
   
   method image() = "imagenMozo.png"

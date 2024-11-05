@@ -35,6 +35,7 @@ object configuracion {
 		mesas.forEach({ mesa => game.addVisual(mesa) })
 		vidas.forEach({ vida => game.addVisual(vida) })
 		platos.forEach({plato => game.addVisual(plato)})
+		rellenos.forEach({relleno => game.addVisual(relleno)})
 		game.addVisualCharacter(mozo)
 	}
 	
