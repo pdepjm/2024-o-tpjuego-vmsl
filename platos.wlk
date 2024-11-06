@@ -11,33 +11,21 @@ class Comida{
 
 class Pasta inherits Comida{
 
-  override method imagenDialogo() = "dialogoPasta.png"
+  override method imagenDialogo() = "dialogoPast.png"
 }
-
-/*
-object hamburguesa{
-
-    const puntaje = 10
-    method puntaje() = puntaje 
-    const property position = game.at(5, 0)
-
-    method imagenDialogo() = "hamburguesaDialogo.png"
-}
-*/
 
 class Sandwich inherits Comida{
-  //override method imagenDialogo() = "dialogoSandwich.png" //Agregar imagen
-  override method imagenDialogo() = "dialogoSandwich1.png"
+  override method imagenDialogo() = "dialogoSandw.png"
 }
 
 
 class Ensalada inherits Comida{
-  override method imagenDialogo() = "dialogoEnsalada.png" //Agregar imagen
+  override method imagenDialogo() = "dialogoEns.png" 
 }
 
 
 class Waffle inherits Comida{
-  override method imagenDialogo() = "dialogoWaffle.png" //Agregar imagen
+  override method imagenDialogo() = "dialogoWaff.png" 
 }
 
 
@@ -72,7 +60,7 @@ class Relleno {
 const bandeja1 = new Relleno(position = game.at(1,0.5), image = "bandeja1.png")
 const bandeja2 = new Relleno(position = game.at(2,0.5), image = "bandeja2.png")
 const menu2 = new Relleno(position = game.at(3,1), image = "menu3.png")
-const cafes = new Relleno(position = game.at(5,1), image = "aaa1.png")
+const cafes = new Relleno(position = game.at(5,1), image = "platoCafe.png")
 
 const platillos = new Relleno(position = game.at(21,1), image = "platillo1.png")
 const menu = new Relleno(position = game.at(27,0.5), image = "menu1.png")
