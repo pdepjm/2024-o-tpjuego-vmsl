@@ -43,6 +43,7 @@ object puntaje {
 object mozo {
   var property bandeja = null
   var property position = game.at(1, 3)
+  //var property posicionesOcupadas = [] //intento de que el mozo no pase por encima de las mesas
   
   method image() = "imagenMozo.png"
   
@@ -153,4 +154,26 @@ object mozo {
       dialogo.mostrar()
     }
   }
+
+//intento de que el mozo no pase por encima de las mesas
+/*
+  method posicionOcupada() {
+    posicionesOcupadas = mesas.map({mesa=>mesa.position()})   
+  }
+
+
+  method moverse(direccion) {
+    const nuevaPosicion = game.at(self.position().x() + direccion.x(), self.position().y() + direccion.y()) 
+    // Verificar colisiones con las mesas 
+    if (posicionesOcupadas.contains(nuevaPosicion)){ 
+      console.println("Movimiento bloqueado por una mesa")
+    } 
+    else {
+      self.position(nuevaPosicion)
+    }
+   }
+ */
+  
 }
+
+
