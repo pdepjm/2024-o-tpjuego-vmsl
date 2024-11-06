@@ -7,7 +7,7 @@ class Cliente {
   var property position = game.at(0, 0)
   var property paciencia = 10000.randomUpTo(15000).truncate(0)
   //agrego esto para probar metodos de agarrar y entregar
-  var property plato = hamburguesa
+  var property plato = pasta
   // Estados:
   // 0 -> Esperando a ser atendido
   // 1 -> Esperando plato de comida

@@ -27,7 +27,7 @@ object configuracion {
 		game.width(30)
 		game.height(15)
 		game.cellSize(100)
-		game.title("Wollok Dinner")
+		game.title("Wollok Diner")
 	}
 	
 	method setVisuals() {
@@ -45,7 +45,7 @@ object configuracion {
 		//Mostrar contenido de la bandeja
 		keyboard.space().onPressDo({ mozo.mostrarBandeja() })
 		//Agarrar platos(Mozo)
-		keyboard.h().onPressDo({ mozo.agarrar(hamburguesa) })
+		keyboard.p().onPressDo({ mozo.agarrar(pasta)})
 		keyboard.s().onPressDo({mozo.agarrar(sandwich)})
 		keyboard.e().onPressDo({mozo.agarrar(ensalada)})
 		keyboard.w().onPressDo({mozo.agarrar(waffle)})
