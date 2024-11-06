@@ -11,7 +11,7 @@ UTN - Facultad Regional Buenos Aires - Materia Paradigmas de Programación
 - Matías Valtolina
 
 ## Capturas 
-(assets/portada.png)
+![portada juego](portada.png)
 
 ## Reglas de Juego / Instrucciones
 
@@ -26,6 +26,7 @@ UTN - Facultad Regional Buenos Aires - Materia Paradigmas de Programación
 
 - `ESPACIO` para mostrar el contenido de la bandeja.
 - `F` para interactuar con el cliente.
+
 **Agarrar platos (debes estar cerca de la barra):**
   - `H` para agarrar una hamburguesa.
   - `S` para agarrar un sandwich.
