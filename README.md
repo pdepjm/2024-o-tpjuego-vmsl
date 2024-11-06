@@ -29,9 +29,5 @@ https://lucid.app/lucidchart/b44f4841-ae99-46be-a7ee-56ef28c11418/edit?viewport_
 
 - `ESPACIO` para mostrar el contenido de la bandeja.
 - `F` para interactuar con el cliente.
-
-**Agarrar platos (debes estar cerca de la barra):**
-  - `H` para agarrar una hamburguesa.
-  - `S` para agarrar un sandwich.
-  - `E` para agarrar una ensalada.
-  - `W` para agarrar un waffle.
+- `E` Agarrar platos (debes estar cerca de la barra).
+ 
