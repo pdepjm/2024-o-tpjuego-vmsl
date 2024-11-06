@@ -93,7 +93,7 @@ object mozo {
   }
   
   method tomarPedido(cliente) {
-    const platoElegido = platos.anyOne()
+    const platoElegido = comidas.anyOne()
     cliente.estado(1)
     cliente.plato(platoElegido)
     const dialogo = new Dialogo(

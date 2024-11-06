@@ -46,7 +46,7 @@ const sandwich = new Sandwich(puntaje = 8, position = game.at(2, 5))
 const ensalada = new Ensalada(puntaje = 12, position = game.at(7, 5))
 const waffle = new Waffle(puntaje = 11, position = game.at(7, 10))
 
-const comidas = [hamburguesa]
+const comidas = [hamburguesa, sandwich, ensalada, waffle]
 
 
 class Plato {
