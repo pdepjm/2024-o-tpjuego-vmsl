@@ -13,6 +13,8 @@ UTN - Facultad Regional Buenos Aires - Materia Paradigmas de Programación
 ## Capturas 
 ![portadafinal](https://github.com/user-attachments/assets/f9dbdbb1-11ce-44d1-822c-6df9e5957896)
 
+## Diagrama estático 
+https://lucid.app/lucidchart/b44f4841-ae99-46be-a7ee-56ef28c11418/edit?viewport_loc=-4328%2C-47%2C6451%2C2681%2C0_0&invitationId=inv_0a72b3d6-0799-4e88-aab0-421be4586f94 
 
 ## Reglas de Juego / Instrucciones
 
