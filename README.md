@@ -13,6 +13,8 @@ UTN - Facultad Regional Buenos Aires - Materia Paradigmas de Programación
 ## Capturas 
 ![portadafinal](https://github.com/user-attachments/assets/f9dbdbb1-11ce-44d1-822c-6df9e5957896)
 
+## Diagrama estático 
+https://lucid.app/lucidchart/b44f4841-ae99-46be-a7ee-56ef28c11418/edit?viewport_loc=-4328%2C-47%2C6451%2C2681%2C0_0&invitationId=inv_0a72b3d6-0799-4e88-aab0-421be4586f94 
 
 ## Reglas de Juego / Instrucciones
 
@@ -27,9 +29,5 @@ UTN - Facultad Regional Buenos Aires - Materia Paradigmas de Programación
 
 - `ESPACIO` para mostrar el contenido de la bandeja.
 - `F` para interactuar con el cliente.
-
-**Agarrar platos (debes estar cerca de la barra):**
-  - `H` para agarrar una hamburguesa.
-  - `S` para agarrar un sandwich.
-  - `E` para agarrar una ensalada.
-  - `W` para agarrar un waffle.
+- `E` Agarrar platos (debes estar cerca de la barra).
+ 
