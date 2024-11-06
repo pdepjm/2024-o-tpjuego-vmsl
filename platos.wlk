@@ -3,7 +3,7 @@ object vacio {
 }
 
 class Comida {
-  const puntaje
+  var property puntaje
   var property position
   var property image
   

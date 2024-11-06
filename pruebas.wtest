@@ -65,7 +65,7 @@ describe "test de comportamiento basico" {
     cliente.sentarseEnMesa(mesa)
     cliente.paciencia(0)
     
-    spawnerClientes.pacienciaHandler(cliente, mesa)
+    spawnerClientes.pacienciaHandler(cliente, mesa, 0)
     // Simular el paso del tiempo para agotar la paciencia del cliente
     
     
