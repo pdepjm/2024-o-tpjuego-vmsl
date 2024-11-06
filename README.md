@@ -11,7 +11,8 @@ UTN - Facultad Regional Buenos Aires - Materia Paradigmas de Programación
 - Matías Valtolina
 
 ## Capturas 
-![portada juego](portada.png)
+![portadafinal](https://github.com/user-attachments/assets/f9dbdbb1-11ce-44d1-822c-6df9e5957896)
+
 
 ## Reglas de Juego / Instrucciones
 
