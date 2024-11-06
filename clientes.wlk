@@ -1,7 +1,9 @@
+import mozo.*
 import wollok.game.*
 import platos.*
 import mueblesMapa.*
 import configuracion.vida
+
 class Cliente {
   var property id = 0.randomUpTo(200000000).truncate(0)
   var property position = game.at(0, 0)
@@ -13,7 +15,7 @@ class Cliente {
   // 1 -> Esperando plato de comida
   // 2 -> Comiendo
   var property estado = 0
-
+  
   method sentarseEnMesa(mesa) {
     position = game.at(mesa.position().x(), mesa.position().y())
     mesa.ocuparMesa(self)
@@ -25,14 +27,29 @@ class Cliente {
 }
 
 object spawnerClientes {
-  method pacienciaHandler(cliente, mesa) {
-    game.onTick(
-      cliente.paciencia(),
-      "pacienciaCliente/" + cliente.id(),
+  method pacienciaHandler(cliente, mesa, estado) {
+    const dialogo = new Dialogo(
+      position = game.at(
+        cliente.position().x() + 0.5,
+        cliente.position().y() + 1.5
+      ),
+      duration = (cliente.paciencia() / 3).truncate(0),
+      image = if (estado == 0) {
+        "feliz.png"
+      } else {
+        if (estado == 1) "esperando.png" else "enojado.png"
+      }
+    )
+    dialogo.mostrar()
+    game.schedule(
+      (cliente.paciencia() / 3).truncate(0),
       { 
-        mesa.desocuparMesa()
-        vida.perderVida()
-        return game.removeVisual(cliente)
+        if (estado == 4) {
+          mesa.desocuparMesa()
+          vida.perderVida()
+          return game.removeVisual(cliente)
+        }
+        return self.pacienciaHandler(cliente, mesa, estado + 1)
       }
     )
   }
@@ -52,10 +69,18 @@ object spawnerClientes {
           cliente.sentarseEnMesa(mesa)
           // Crea un objeto nuevo de cliente y le asigna una mesa de las disponibles 
           
+          
+          
+          
+          
           game.addVisual(cliente)
           // Este onTick se encarga de eliminar al cliente y desocupar la mesa cuando se le acaba la paciencia    
           
-          self.pacienciaHandler(cliente, mesa)
+          
+          
+          
+          
+          self.pacienciaHandler(cliente, mesa, 0)
         }
       }
     )
