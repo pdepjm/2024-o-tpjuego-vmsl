@@ -35,7 +35,8 @@ object configuracion {
 		game.addVisual(puntaje)
 		mesas.forEach({ mesa => game.addVisual(mesa) })
 		vidas.forEach({ vida => game.addVisual(vida) })
-		platos.forEach({plato => game.addVisual(plato)})
+		comidas.forEach({plato => game.addVisual(plato)})
+
 		rellenos.forEach({relleno => game.addVisual(relleno)})
 		game.addVisualCharacter(mozo)
 	}
@@ -45,10 +46,7 @@ object configuracion {
 		//Mostrar contenido de la bandeja
 		keyboard.space().onPressDo({ mozo.mostrarBandeja() })
 		//Agarrar platos(Mozo)
-		keyboard.p().onPressDo({ mozo.agarrar(pasta)})
-		keyboard.s().onPressDo({mozo.agarrar(sandwich)})
-		keyboard.e().onPressDo({mozo.agarrar(ensalada)})
-		keyboard.w().onPressDo({mozo.agarrar(waffle)})
+		keyboard.e().onPressDo({ mozo.agarrar()})
 		//Interaccion con el cliente
 		keyboard.f().onPressDo({ mozo.interactuarConCliente() })
 	}

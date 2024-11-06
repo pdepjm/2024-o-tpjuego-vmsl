@@ -52,15 +52,16 @@ object mozo {
     puntaje -= 500
   }
   
-  method platoCercano() = platos.findOrElse(
+  method platoCercano() = comidas.findOrElse(
     { plato => self.position().distance(plato.position()) <= 1 },
     { null }
   )
   
-  method agarrar(plato) {
-    const posicion = self.position()
+  method agarrar() {
+    const plato = self.platoCercano()
     if (self.platoCercano() !== null) {
       bandeja = plato
+      self.mostrarBandeja()
     } else {
       const dialogo = new Dialogo(
         position = game.at(self.position().x() + 1, self.position().y() + 2),
