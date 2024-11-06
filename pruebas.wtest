@@ -64,8 +64,6 @@ describe "test de comportamiento basico" {
     const mesa = mesa1
     cliente.sentarseEnMesa(mesa)
     cliente.paciencia(0)
-    
-    spawnerClientes.pacienciaHandler(cliente, mesa, 0)
     // Simular el paso del tiempo para agotar la paciencia del cliente
     
     
