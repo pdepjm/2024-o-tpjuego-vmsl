@@ -20,7 +20,7 @@ https://lucid.app/lucidchart/b44f4841-ae99-46be-a7ee-56ef28c11418/edit?viewport_
 
 1.	**Inicia el juego:** Al iniciar el juego, los clientes comenzarán a aparecer en las mesas disponibles.
 2.	**Toma pedidos:** Acércate a un cliente y presiona F para tomar su pedido. El cliente te dirá qué plato quiere.
-3.	**Busca los platos:** Usa las teclas correspondientes (H, S, E, W) para colocar el plato deseado en tu bandeja.
+3.	**Busca los platos:** Usa la tecla "E" para colocar el plato deseado en tu bandeja.
 4.	**Servir a los clientes:** Una vez que tengas el plato correcto, acércate al cliente nuevamente y presiona F para entregárselo.
 5.	**Puntaje:** Ganas puntos al entregar platos correctamente y a tiempo. Pierdes puntos si el plato es incorrecto o si los clientes pierden la paciencia y se van.
 
