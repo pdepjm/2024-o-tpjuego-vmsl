@@ -19,11 +19,30 @@ class Dialogo {
     game.schedule(duration, { game.removeVisual(self) })
   }
 }
+object puntaje {
+  var property puntaje = 0
+  //var property image = 0
+  const property position = game.at(0, 14)
+  
+  method cambiarPuntaje(nuevoPuntaje) {
+    puntaje += nuevoPuntaje
+
+  }
+  
+  method text() = puntaje.toString()
+  method textColor() = "FFFFFFFF" //Color blanco
+  //de esta forma, puede que distintos nombres de metodos a llamar
+  method sumarPuntos(cliente) {
+    self.cambiarPuntaje(cliente.plato().puntaje() * cliente.paciencia())
+  }
+  method restarPuntos(cliente) {
+    self.cambiarPuntaje(-1000)
+  }
+}
 
 object mozo {
   var property bandeja = null
   var property position = game.at(1,3)
-  var property puntaje = 0
   
   method image() = "imagenMozo.png"
   
@@ -42,15 +61,6 @@ object mozo {
     }
   }
   
-  //de esta forma, puede que distintos nombres de metodos a llamar
-  method sumarPuntos(cliente, plato) {
-    puntaje = plato.puntaje() * cliente.paciencia()
-  }
-  
-  //seria otro sistema para los puntos, falta implementar
-  method restarPuntos() {
-    puntaje -= 500
-  }
   
   method agarrar(plato) {
     const posicion = self.position()
@@ -76,20 +86,26 @@ object mozo {
   method entregarPlato(cliente) {
     // Chequea si el plato que quiere el cliente es el mismo que el que tenemos en la bandeja
     if (cliente.plato() == self.bandeja()) {
+      puntaje.sumarPuntos(cliente)
       game.removeTickEvent(
-        "pacienciaCliente/" + self.mesaCercana().clienteSentado().id()
+        "pacienciaCliente/" + cliente.id()
       )
       cliente.estado(2)
+
       console.println("Plato entregado")
       game.schedule(
         0,
         { 
-          game.removeVisual(self.mesaCercana().clienteSentado())
+          game.removeVisual(cliente)
           return self.mesaCercana().desocuparMesa()
         }
       )
     }
-    self.bandeja(null)
+    else{
+      puntaje.restarPuntos(cliente)
+      console.println("Plato equivocado")
+    }
+     self.bandeja(null)
   }
   
   method tomarPedido(cliente) {
@@ -120,17 +136,4 @@ object mozo {
       }
     }
   }
-}
-
-object puntaje {
-  var property puntaje = 0
-  //var property image = 0
-  const property position = game.at(0, 14)
-  
-  method cambiarPuntaje(nuevoPuntaje) {
-    puntaje += nuevoPuntaje
-  }
-  
-  method text() = puntaje.toString()
-  method textColor() = "FFFFFFFF" //Color blanco
 }
