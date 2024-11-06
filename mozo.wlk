@@ -22,7 +22,7 @@ class Dialogo {
 
 object mozo {
   var property bandeja = null
-  var property position = game.at(1,3)
+  var property position = game.at(1, 3)
   var property puntaje = 0
   
   method image() = "imagenMozo.png"
@@ -52,24 +52,29 @@ object mozo {
     puntaje -= 500
   }
   
+  method platoCercano() = platos.findOrElse(
+    { plato => self.position().distance(plato.position()) <= 1 },
+    { null }
+  )
+  
   method agarrar(plato) {
     const posicion = self.position()
-    //checkea que el mozo este dentro de la zona de la barra
-    if ((posicion.y() >= 0) && (posicion.y() <= 2)) {
+    if (self.platoCercano() !== null) {
       bandeja = plato
-      console.println(plato)
     } else {
-      console.println("fuera de la zona de la barra")
+      const dialogo = new Dialogo(
+        position = game.at(self.position().x() + 1, self.position().y() + 2),
+        duration = 1500,
+        image = "dialogoLejosBarra.png"
+      )
+      dialogo.mostrar()
     }
   }
   
-  method distance(
-    objeto1,
-    objeto2
-  ) = (((objeto1.position().x() ** 2) - (objeto2.position().x() ** 2)) + ((objeto1.position().y() ** 2) - (objeto2.position().y() ** 2))).squareRoot()
-  
   method mesaCercana() = mesas.findOrElse(
-    { mesa => mesa.estaOcupada() && (self.distance(self, mesa) <= 4) },
+    { mesa => mesa.estaOcupada() && (self.position().distance(
+        mesa.position()
+      ) <= 2) },
     { null }
   ) // Hacer mas declarativa esta funcion
   
@@ -109,15 +114,26 @@ object mozo {
   
   method interactuarConCliente() {
     // Chequea que tengamos un cliente cerca
-    if ((self.mesaCercana() !== null)) {
+    if (self.mesaCercana() !== null) {
       const clienteCercano = self.mesaCercana().clienteSentado()
       // El cliente esta esperando que le tomen el pedido
       if (clienteCercano.estado() == 0) {
         self.tomarPedido(clienteCercano)
-      } else if (clienteCercano.estado() == 1  && self.bandeja() !== null) {
+      } else {
+        if ((clienteCercano.estado() == 1) && (self.bandeja() !== null))
           // El cliente esta esperando que le tomen el pedido
           self.entregarPlato(clienteCercano)
       }
+    } else {
+      const dialogo = new Dialogo(
+        position = game.at(
+          self.position().x() + 1,
+          self.position().y() + 2
+        ),
+        duration = 1500,
+        image = "dialogoClienteLejos.png"
+      )
+      dialogo.mostrar()
     }
   }
 }
@@ -132,5 +148,6 @@ object puntaje {
   }
   
   method text() = puntaje.toString()
-  method textColor() = "FFFFFFFF" //Color blanco
+  
+  method textColor() = "FFFFFFFF"
 }
