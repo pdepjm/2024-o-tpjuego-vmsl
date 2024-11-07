@@ -4,6 +4,8 @@ import platos.*
 import mueblesMapa.*
 import configuracion.vida
 
+// Añadir diferentes clientes ej especial, etc
+
 class Cliente {
   var property id = 0.randomUpTo(200000000).truncate(0)
   var property position = game.at(0, 0)
