@@ -6,6 +6,8 @@ import configuracion.vida
 
 // Añadir diferentes clientes ej especial, etc
 
+const clientes = ["cliente1uno.png", "cliente2dos.png", "cliente3tres.png", "cliente4cuatro.png"]
+
 class Cliente {
   var property id = 0.randomUpTo(200000000).truncate(0)
   var property position = game.at(0, 0)
@@ -23,7 +25,7 @@ class Cliente {
     mesa.ocuparMesa(self)
   }
     
-  method image() = "cliente1uno.png"
+  const property image = clientes.anyOne()
   //"cliente2dos.png" "cliente3tres.png" "cliente4cuatro.png" 
   //const clienteElegido = clientes.anyOne() ??
 }
