@@ -20,7 +20,7 @@ class Cliente {
     position = game.at(mesa.position().x(), mesa.position().y())
     mesa.ocuparMesa(self)
   }
-    
+  
   method image() = "cliente-1.png"
 }
 

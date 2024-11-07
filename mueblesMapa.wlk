@@ -14,7 +14,7 @@ class Mesa {
   }
 }
 
-
+// CAmbiar image de la instancia a la clase
 const mesa1 = new Mesa(position = game.at(3,11), image = "muebles.png")
 const mesa2 = new Mesa(position = game.at(21,11), image = "muebles.png")
 const mesa3 = new Mesa(position = game.at(12,7.6), image = "muebles.png")

@@ -20,7 +20,7 @@ describe "test de comportamiento basico" {
     assert.equals(1, cliente.estado()) // El mozo entrega el plato
     
     mozo.bandeja(cliente.plato())
-    mozo.entregarPlato(cliente)
+    mozo.entregarPlato(cliente, mesa1)
     // Verificar que el cliente está comiendo (estado = 2)
     assert.equals(2,cliente.estado())
 
@@ -38,7 +38,7 @@ describe "test de comportamiento basico" {
     mozo.position(game.at(2, 11))
     mozo.interactuarConCliente()
     mozo.bandeja(cliente.plato())
-    mozo.entregarPlato(cliente)
+    mozo.entregarPlato(cliente, mesa1)
     // Verificar que la puntuación se actualizó correctamente
     assert.equals(
       puntaje.puntaje(),
@@ -54,7 +54,7 @@ describe "test de comportamiento basico" {
     // El mozo toma el pedido equivocado y entrega el plato     
     mozo.position(game.at(2, 11))
     mozo.bandeja(ensalada)
-    mozo.entregarPlato(cliente)
+    mozo.entregarPlato(cliente, mesa1)
     // Verificar que la puntuación se actualizó correctamente    
     assert.equals(puntaje.puntaje(), -1000)
   }
