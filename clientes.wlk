@@ -17,11 +17,13 @@ class Cliente {
   var property estado = 0
   
   method sentarseEnMesa(mesa) {
-    position = game.at(mesa.position().x(), mesa.position().y())
+    position = game.at(mesa.position().x(), mesa.position().y()+1)
     mesa.ocuparMesa(self)
   }
-  
-  method image() = "cliente-1.png"
+    
+  method image() = "cliente1uno.png"
+  //"cliente2dos.png" "cliente3tres.png" "cliente4cuatro.png" 
+  //const clienteElegido = clientes.anyOne() ??
 }
 
 object spawnerClientes {
@@ -29,7 +31,7 @@ object spawnerClientes {
     const dialogo = new Dialogo(
       position = game.at(
         cliente.position().x() + 0.5,
-        cliente.position().y() + 1.5
+        cliente.position().y() + 2.5
       ),
       duration = (cliente.paciencia() / 3).truncate(0),
       image = if (estado == 0) {
