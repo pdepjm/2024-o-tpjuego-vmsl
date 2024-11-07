@@ -4,10 +4,14 @@ import platos.*
 import mueblesMapa.*
 import configuracion.vida
 
+// Añadir diferentes clientes ej especial, etc
+
+const clientes = ["cliente1uno.png", "cliente2dos.png", "cliente3tres.png", "cliente4cuatro.png"]
+
 class Cliente {
   var property id = 0.randomUpTo(200000000).truncate(0)
   var property position = game.at(0, 0)
-  var property paciencia = 10000.randomUpTo(15000).truncate(0)
+  var property paciencia = 20000.randomUpTo(30000).truncate(0)
   //agrego esto para probar metodos de agarrar y entregar
   var property plato = pasta
   // Estados:
@@ -21,7 +25,7 @@ class Cliente {
     mesa.ocuparMesa(self)
   }
     
-  method image() = "cliente1uno.png"
+  const property image = clientes.anyOne()
   //"cliente2dos.png" "cliente3tres.png" "cliente4cuatro.png" 
   //const clienteElegido = clientes.anyOne() ??
 }
@@ -47,6 +51,7 @@ object spawnerClientes {
         if (estado == 4) {
           mesa.desocuparMesa()
           vida.perderVida()
+          dialogo.eliminar()
           return game.removeVisual(cliente)
         }
         return self.pacienciaHandler(cliente, mesa, estado + 1)
@@ -57,7 +62,7 @@ object spawnerClientes {
   method comenzar() {
     /* Spawn de clientes en la posicion de la mesa si es que hay disponibles */
     game.onTick(
-      2000,
+      5000,
       "spawnClientes",
       { 
         const mesasDisponibles = mesas.filter(
@@ -68,8 +73,6 @@ object spawnerClientes {
           const cliente = new Cliente()
           cliente.sentarseEnMesa(mesa)
           // Crea un objeto nuevo de cliente y le asigna una mesa de las disponibles 
-          
-          
           
           
           

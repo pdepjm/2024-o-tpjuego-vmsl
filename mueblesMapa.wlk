@@ -14,11 +14,11 @@ class Mesa {
   }
 }
 
-
-const mesa1 = new Mesa(position = game.at(3,9.5), image = "mesita.png")
-const mesa2 = new Mesa(position = game.at(21,9.5), image = "mesita.png")
-const mesa3 = new Mesa(position = game.at(12,6.1), image = "mesita.png")
-const mesa4 = new Mesa(position = game.at(3,3), image = "mesita.png")
-const mesa5 = new Mesa(position = game.at(21,3.5), image = "mesita.png")
+// CAmbiar image de la instancia a la clase
+const mesa1 = new Mesa(position = game.at(3,11), image = "mesita.png")
+const mesa2 = new Mesa(position = game.at(21,11), image = "mesita.png")
+const mesa3 = new Mesa(position = game.at(12,7.6), image = "mesita.png")
+const mesa4 = new Mesa(position = game.at(3,4.5), image = "mesita.png")
+const mesa5 = new Mesa(position = game.at(21,5), image = "mesita.png")
 
 const mesas = [mesa1, mesa2, mesa3, mesa4, mesa5]

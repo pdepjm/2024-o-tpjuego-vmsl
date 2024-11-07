@@ -10,6 +10,7 @@ class Comida {
   method imagenDialogo()
 }
 
+// Agregar power ups para cada comida
 class Pasta inherits Comida (image = "pasta.png") {
   override method imagenDialogo() = "dialogoPast.png"
 }
