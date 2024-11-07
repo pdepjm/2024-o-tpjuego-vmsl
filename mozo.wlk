@@ -18,6 +18,9 @@ class Dialogo {
     game.addVisual(self)
     game.schedule(duration, { game.removeVisual(self) })
   }
+  method eliminar() {
+    game.removeVisual(self)
+  }
 }
 object puntaje {
   var property puntaje = 0
@@ -90,7 +93,7 @@ object mozo {
     { null }
   ) // Hacer mas declarativa esta funcion
   
-  method entregarPlato(cliente) {
+  method entregarPlato(cliente, mesa) {
     // Chequea si el plato que quiere el cliente es el mismo que el que tenemos en la bandeja
     if (cliente.plato() == self.bandeja()) {
       puntaje.sumarPuntos(cliente)
@@ -98,13 +101,13 @@ object mozo {
         "pacienciaCliente/" + cliente.id()
       )
       cliente.estado(2)
-
+      cliente.paciencia(cliente.paciencia() + 2500)
       console.println("Plato entregado")
       game.schedule(
-        0,
+        1000,
         { 
           game.removeVisual(cliente)
-          return self.mesaCercana().desocuparMesa()
+          return mesa.desocuparMesa()
         }
       )
     }
@@ -140,7 +143,7 @@ object mozo {
       } else {
         if ((clienteCercano.estado() == 1) && (self.bandeja() !== null))
           // El cliente esta esperando que le tomen el pedido
-          self.entregarPlato(clienteCercano)
+          self.entregarPlato(clienteCercano, self.mesaCercana())
       }
     } else {
       const dialogo = new Dialogo(
