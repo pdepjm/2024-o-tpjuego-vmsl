@@ -80,7 +80,7 @@ object mozo {
       const dialogo = new Dialogo(
         position = game.at(self.position().x() + 1, self.position().y() + 2),
         duration = 1500,
-        image = "dialogoLejosBarra.png"
+        image = "dialogoBarraLejos.png"
       )
       dialogo.mostrar()
     }
@@ -152,7 +152,7 @@ object mozo {
           self.position().y() + 2
         ),
         duration = 1500,
-        image = "dialogoClienteLejos.png"
+        image = "dialogoClientesLejo.png"
       )
       dialogo.mostrar()
     }

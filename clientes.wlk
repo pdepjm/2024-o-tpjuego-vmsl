@@ -26,8 +26,6 @@ class Cliente {
   }
     
   const property image = clientes.anyOne()
-  //"cliente2dos.png" "cliente3tres.png" "cliente4cuatro.png" 
-  //const clienteElegido = clientes.anyOne() ??
 }
 
 object spawnerClientes {
@@ -39,9 +37,9 @@ object spawnerClientes {
       ),
       duration = (cliente.paciencia() / 3).truncate(0),
       image = if (estado == 0) {
-        "feliz.png"
+        "feliz1.png"
       } else {
-        if (estado == 1) "esperando.png" else "enojado.png"
+        if (estado == 1) "esperando1.png" else "enojado1.png"
       }
     )
     dialogo.mostrar()

@@ -3,7 +3,7 @@ import mozo.*
 import platos.*
 
 class Estrella {
-	var property image = "star.png"
+	var property image = "estrella.png"   //no hay media estrella??
 	var property position
 }
 
