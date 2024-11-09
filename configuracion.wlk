@@ -2,26 +2,6 @@ import mueblesMapa.*
 import mozo.*
 import platos.*
 
-class Estrella {
-	var property image = "estrella.png"   //no hay media estrella??
-	var property position
-}
-
-const vidas = [
-	new Estrella(position = game.at(29, 14)),
-	new Estrella(position = game.at(28, 14)),
-	new Estrella(position = game.at(27, 14))
-]
-
-object vida {
-	method perderVida() {
-		if (vidas.size() > 0) {
-			game.removeVisual(vidas.head())
-			vidas.remove(vidas.head())
-		}
-	}
-}
-
 object configuracion {
 	method setGeneral() {
 		game.width(30)
@@ -34,7 +14,7 @@ object configuracion {
 		game.boardGround("fondo.jpg")
 		game.addVisual(puntaje)
 		mesas.forEach({ mesa => game.addVisual(mesa) })
-		vidas.forEach({ vida => game.addVisual(vida) })
+		mozo.vidas().forEach({ vida => game.addVisual(vida) })
 		comidas.forEach({plato => game.addVisual(plato)})
 
 		rellenos.forEach({relleno => game.addVisual(relleno)})

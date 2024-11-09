@@ -2,7 +2,6 @@ import mozo.*
 import wollok.game.*
 import platos.*
 import mueblesMapa.*
-import configuracion.vida
 
 // Añadir diferentes clientes ej especial, etc
 
@@ -48,7 +47,7 @@ object spawnerClientes {
       { 
         if (estado == 4) {
           mesa.desocuparMesa()
-          vida.perderVida()
+          mozo.perderVida()
           dialogo.eliminar()
           return game.removeVisual(cliente)
         }

@@ -68,10 +68,10 @@ describe "test de comportamiento basico" {
     
     
     mesa.desocuparMesa()
-    vida.perderVida()
+    mozo.perderVida()
     game.removeVisual(cliente)
     // Verificar que el cliente fue eliminado y se perdió una vida
     
-    assert.equals(2, vidas.size())
+    assert.equals(2, mozo.vidas().size())
   }
 }

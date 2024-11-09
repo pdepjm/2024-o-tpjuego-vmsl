@@ -43,9 +43,19 @@ object puntaje {
   }
 }
 
+class Estrella {
+	var property image = "estrella.png"   //no hay media estrella??
+	var property position
+}
+
 object mozo {
   var property bandeja = null
   var property position = game.at(1, 3)
+  const property vidas = [
+	  new Estrella(position = game.at(29, 14)),
+	  new Estrella(position = game.at(28, 14)),
+	  new Estrella(position = game.at(27, 14))
+    ]
   //var property posicionesOcupadas = [] //intento de que el mozo no pase por encima de las mesas
   
   method image() = "imagenMozo.png"
@@ -60,6 +70,13 @@ object mozo {
         position = game.at(self.posicionDialogoX(), self.posicionDialogoY()),
         duration = 1000,
         image = bandeja.imagenDialogo()
+      ) // Dura 2 segundos
+      dialogo.mostrar()
+    }else{
+        const dialogo = new Dialogo(
+        position = game.at(self.posicionDialogoX(), self.posicionDialogoY()),
+        duration = 1000,
+        image = "vacioDialogo.png"
       ) // Dura 2 segundos
       dialogo.mostrar()
     }
@@ -156,7 +173,15 @@ object mozo {
       )
       dialogo.mostrar()
     }
+
   }
+
+  method perderVida() {
+		if (vidas.size() > 0) {
+			game.removeVisual(vidas.head())
+			vidas.remove(vidas.head())
+		}
+	}
 
 //intento de que el mozo no pase por encima de las mesas
 /*

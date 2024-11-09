@@ -1,6 +1,7 @@
+/*
 object vacio {
   method imagenDialogo() = "vacioDialogo.png"
-}
+}*/
 
 class Comida {
   var property puntaje
