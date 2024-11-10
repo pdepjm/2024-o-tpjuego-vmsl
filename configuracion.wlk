@@ -1,6 +1,12 @@
+import clientes.*
 import mueblesMapa.*
 import mozo.*
 import platos.*
+
+object gameOver {
+    const property position = game.origin()
+    const property image = "GameOver2.png"
+}
 
 object configuracion {
 	method setGeneral() {
@@ -40,4 +46,10 @@ object configuracion {
 		//Interaccion con el cliente
 		keyboard.f().onPressDo({ mozo.interactuarConCliente() })
 	}
+
+	method terminarJuego() {
+    	game.removeTickEvent("spawnClientes")
+    	game.addVisual(gameOver)
+	}
+
 }

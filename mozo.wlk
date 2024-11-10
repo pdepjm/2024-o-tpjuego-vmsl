@@ -1,3 +1,4 @@
+import configuracion.*
 import platos.*
 import clientes.*
 import mueblesMapa.*
@@ -81,7 +82,6 @@ object mozo {
       dialogo.mostrar()
     }
   }
-  
   
   method platoCercano() = comidas.findOrElse(
     { plato => self.position().distance(plato.position()) <= 1 },
@@ -177,10 +177,12 @@ object mozo {
   }
 
   method perderVida() {
-		if (vidas.size() > 0) {
-			game.removeVisual(vidas.head())
+		if (vidas.size() == 1) {
+			configuracion.terminarJuego()
+		}else{
+      game.removeVisual(vidas.head())
 			vidas.remove(vidas.head())
-		}
+    }
 	}
 
 //intento de que el mozo no pase por encima de las mesas

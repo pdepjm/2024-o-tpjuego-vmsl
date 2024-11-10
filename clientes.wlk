@@ -29,6 +29,7 @@ class Cliente {
 
 object spawnerClientes {
   method pacienciaHandler(cliente, mesa, estado) {
+
     const dialogo = new Dialogo(
       position = game.at(
         cliente.position().x() + 0.5,
@@ -54,6 +55,7 @@ object spawnerClientes {
         return self.pacienciaHandler(cliente, mesa, estado + 1)
       }
     )
+    
   }
   
   method comenzar() {
