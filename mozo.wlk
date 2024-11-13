@@ -3,6 +3,7 @@ import platos.*
 import clientes.*
 import mueblesMapa.*
 
+const dialogos = []
 
 class Dialogo {
   const position
@@ -18,12 +19,12 @@ class Dialogo {
   
   method mostrar() {
     game.addVisual(self)
-    console.println("Nuevo dialogo")
-    game.schedule(duration, { game.removeVisual(self) })
+    dialogos.add(self)
+    console.println(dialogos)
+    game.schedule(duration, { game.removeVisual(self) dialogos.remove(self) })
   }
   
   method eliminar() {
-    console.println("dialogo eliminado")
     game.removeVisual(self)
   }
 }
@@ -93,16 +94,15 @@ object mozo {
 */
 
   method liberarMesas(mesa) {
-    if(mesa.clienteSentado() !== null) {
+    if(mesa.clienteSentado() !== null){
       mesa.clienteSentado().emocion().eliminar() 
       game.removeVisual(mesa.clienteSentado()) 
-    }
-    mesa.desocuparMesa()
+      mesa.desocuparMesa()
+      }
   }
 
   method clienteEspecial() {
     if(clientesAtendidos % 2 == 0) {
-      
       game.removeTickEvent("spawnClientes")
       mesas.forEach({mesa => self.liberarMesas(mesa)})
       const clienteEspecial = new ClienteEspecial()
@@ -159,17 +159,17 @@ object mozo {
   
   method entregarPlato(cliente, mesa) {
     // Chequea si el plato que quiere el cliente es el mismo que el que tenemos en la bandeja
-    game.removeTickEvent("pacienciaCliente/" + cliente.id())
+    game.removeTickEvent("pacienciaCliente/" + cliente.estado() + "/" + cliente.id())
     cliente.emocion().eliminar()
     if (cliente.plato() == self.bandeja()) {
       puntaje.sumarPuntos(cliente)
       cliente.estado(2)
       cliente.agradecer()
       console.println("Plato entregado")
+      cliente.comer()
       game.schedule(
         1000,
         { 
-          cliente.comer()
           game.removeVisual(cliente)
           return mesa.desocuparMesa()
         }
@@ -196,7 +196,6 @@ object mozo {
       image = platoElegido.imagenDialogo()
     )
     dialogo.mostrar()
-    cliente.agradecer()
   }
   
   method interactuarConCliente() {
@@ -223,7 +222,7 @@ object mozo {
   
   method perderVida() {
     if (vidas.size() == 1) {
-
+    configuracion.terminarJuego()
     } else {
       const vidaParaEliminar = vidas.findOrDefault({vida1 => vidas.all({vida2 => vida1.position().x() >= vida2.position().x() }) }, null) // Flashbacks de haskell
       game.removeVisual(vidaParaEliminar)

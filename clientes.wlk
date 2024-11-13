@@ -11,6 +11,9 @@ const clientes = [
   "cliente4cuatro.png"
 ]
 
+const reaccion = ["mensajeGracias.png", "mgMens.png", "mensajeYaEraHora.png"]
+
+//1 es ya era hora
 class Cliente {
   var property id = 0.randomUpTo(200000000).truncate(0)
   var property position = game.at(0, 0)
@@ -25,7 +28,7 @@ class Cliente {
   const property image = clientes.anyOne()
   var property emocion = null
   
-  method posicionDialogoX() = self.position().x() - 2
+  method posicionDialogoX() = self.position().x() + 1
   
   method posicionDialogoY() = self.position().y() + 2
   
@@ -42,7 +45,7 @@ class Cliente {
     const dialogo = new Dialogo(
       position = game.at(self.posicionDialogoX(), self.posicionDialogoY()),
       duration = 1000,
-      image = "graciasMensaje.png"
+      image = "mensajeGracias.png"
     )
     dialogo.mostrar()
   }
@@ -66,8 +69,8 @@ class ClienteEspecial inherits Cliente (
       const nuevaVida = new Estrella(
         position = game.at(posicionVidaTop.x() + 1, 14)
       )
-      mozo.vidas().add(nuevaVida)
-      mozo.vidas(mozo.vidas().reverse())
+      mozo.vidas().add(nuevaVida) //mozo.vidas(mozo.vidas().reverse())
+      
       game.addVisual(nuevaVida)
     }
     spawnerClientes.comenzar()
@@ -75,7 +78,12 @@ class ClienteEspecial inherits Cliente (
   }
   
   override method agradecer() {
-    
+        const dialogo = new Dialogo(
+      position = game.at(self.posicionDialogoX(), self.posicionDialogoY()),
+      duration = 1000,
+      image = "mgMens.png"
+    )
+    dialogo.mostrar()
   }
 }
 
@@ -90,10 +98,23 @@ class ClienteEstricto inherits Cliente (
     position = game.at(mesa1.position().x(), mesa1.position().y() + 1)
     mesa1.ocuparMesa(self)
   }
+  
+  override method agradecer() {
+    const dialogo = new Dialogo(
+      position = game.at(self.posicionDialogoX(), self.posicionDialogoY()),
+      duration = 1000,
+      image = "mensajeYaEraHora.png"
+    )
+    dialogo.mostrar()
+  }
 }
 
 object spawnerClientes {
   method pacienciaHandler(cliente, mesa, estado) {
+    if (estado !== 0) game.removeTickEvent(
+        "pacienciaCliente/" + (estado - 1) + "/" + cliente.id()
+      )
+    
     const dialogo = new Dialogo(
       position = game.at(
         cliente.position().x() + 0.5,
@@ -110,17 +131,14 @@ object spawnerClientes {
     dialogo.mostrar()
     game.onTick(
       (cliente.paciencia() / 3).truncate(0),
-      "pacienciaCliente/" + cliente.id(),
+      (("pacienciaCliente/" + cliente.estado()) + "/") + cliente.id(),
       { if (estado == 4) {
           mesa.desocuparMesa()
           mozo.perderVida()
-          cliente.emocion(null)
           dialogo.eliminar()
-          return game.removeVisual(cliente)
+          game.removeVisual(cliente)
         } else {
-          cliente.emocion(null)
-          dialogo.eliminar()
-          return self.pacienciaHandler(cliente, mesa, estado + 1)
+          self.pacienciaHandler(cliente, mesa, estado + 1)
         } }
     )
   }
@@ -150,8 +168,12 @@ object spawnerClientes {
           
           
           
+          
+          
           game.addVisual(cliente)
           // Este onTick se encarga de eliminar al cliente y desocupar la mesa cuando se le acaba la paciencia    
+          
+          
           
           
           
