@@ -24,7 +24,7 @@ object configuracion {
 		comidas.forEach({plato => game.addVisual(plato)})
 
 		rellenos.forEach({relleno => game.addVisual(relleno)})
-		game.addVisualCharacter(mozo)
+		game.addVisual(mozo)
 	}
 	
 	method setKeyboard() {
@@ -32,12 +32,12 @@ object configuracion {
 
 		//movimiento mozo
 		//intento de que el mozo no pase por encima de las mesas
-		/*
+		
 		keyboard.up().onPressDo { mozo.moverse(mozo.position().up(1)) }
 		keyboard.down().onPressDo { mozo.moverse(mozo.position().down(1)) }
 		keyboard.left().onPressDo { mozo.moverse(mozo.position().left(1)) }
 		keyboard.right().onPressDo { mozo.moverse(mozo.position().right(1)) }
-		*/
+		
 
 		//Mostrar contenido de la bandeja
 		keyboard.space().onPressDo({ mozo.mostrarBandeja() })

@@ -36,6 +36,8 @@ class Cliente {
     position = game.at(mesa.position().x(), mesa.position().y() + 1)
     mesa.ocuparMesa(self)
   }
+
+  method multiplicador() = 1
   
   method comer() {
     
@@ -107,6 +109,8 @@ class ClienteEstricto inherits Cliente (
     )
     dialogo.mostrar()
   }
+
+  override method multiplicador() = 10
 }
 
 object spawnerClientes {

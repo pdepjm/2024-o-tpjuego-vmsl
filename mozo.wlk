@@ -44,7 +44,7 @@ object puntaje {
   
   //de esta forma, puede que distintos nombres de metodos a llamar
   method sumarPuntos(cliente) {
-    self.cambiarPuntaje(cliente.plato().puntaje() * cliente.paciencia())
+    self.cambiarPuntaje(cliente.plato().puntaje() * cliente.multiplicador())
   }
   
   method restarPuntos(cliente) {
@@ -229,4 +229,17 @@ object mozo {
       vidas.remove(vidaParaEliminar)
     }
   }
+
+// Verifica movimiento dentro de los limites del juego
+method dentroDeLimites(direccion) = direccion.x() >= 1 && direccion.x() < game.width() - 1 
+                                && direccion.y() >= 1 && direccion.y() < game.height() - 1
+
+  method moverse(direccion) {
+    if (self.dentroDeLimites(direccion)){
+      self.position(direccion)
+    }
+    else { 
+      console.println("Movimiento bloqueado por una mesa")
+    } 
+   }
 }
