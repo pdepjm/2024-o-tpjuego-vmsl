@@ -45,7 +45,7 @@ object puntaje {
 }
 
 class Estrella {
-	var property image = "estrella.png"   //no hay media estrella??
+	var property image = "estrella.png"   
 	var property position
 }
 
@@ -64,7 +64,7 @@ object mozo {
   method posicionDialogoX() = self.position().x() + 1
   
   method posicionDialogoY() = self.position().y() + 2
-  
+
   method mostrarBandeja() {
     if (self.bandeja() !== null) {
       const dialogo = new Dialogo(
