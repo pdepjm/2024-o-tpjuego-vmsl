@@ -19,10 +19,12 @@ class Dialogo {
     game.addVisual(self)
     game.schedule(duration, { game.removeVisual(self) })
   }
+  
   method eliminar() {
     game.removeVisual(self)
   }
 }
+
 object puntaje {
   var property puntaje = 0
   //var property image = 0
@@ -30,41 +32,75 @@ object puntaje {
   
   method cambiarPuntaje(nuevoPuntaje) {
     puntaje += nuevoPuntaje
-
   }
   
   method text() = puntaje.toString()
-  method textColor() = "FFFFFFFF" //Color blanco
+  //method fontSize() = 24
+  method textColor() = "FFFFFFFF"
+  
   //de esta forma, puede que distintos nombres de metodos a llamar
   method sumarPuntos(cliente) {
     self.cambiarPuntaje(cliente.plato().puntaje() * cliente.paciencia())
   }
+  
   method restarPuntos(cliente) {
     self.cambiarPuntaje(-1000)
   }
 }
 
 class Estrella {
-	var property image = "estrella.png"   //no hay media estrella??
-	var property position
+  var property image = "estrella.png"
+  //no hay media estrella??
+  var property position
 }
 
 object mozo {
   var property bandeja = null
   var property position = game.at(1, 3)
-  const property vidas = [
-	  new Estrella(position = game.at(29, 14)),
-	  new Estrella(position = game.at(28, 14)),
-	  new Estrella(position = game.at(27, 14))
-    ]
+  var property vidas = [
+    new Estrella(position = game.at(29, 14)),
+    new Estrella(position = game.at(28, 14)),
+    new Estrella(position = game.at(27, 14))
+  ]
+  var property clientesAtendidos = 0
   //var property posicionesOcupadas = [] //intento de que el mozo no pase por encima de las mesas
-  
   method image() = "imagenMozo.png"
   
   method posicionDialogoX() = self.position().x() + 1
   
   method posicionDialogoY() = self.position().y() + 2
   
+  /*
+  var property position = game.at(1, 3)
+  const minX = 0
+  const minY = 0
+  const maxX = game.width() - 1
+  const maxY = game.height() - 1
+
+  method move(dx, dy) {
+    const newX = position.x() + dx
+    const newY = position.y() + dy
+
+    if (newX >= minX && newX <= maxX) {
+      position = position.x(newX)
+    }
+    if (newY >= minY && newY <= maxY) {
+      position = position.y(newY)
+    }
+  }
+*/
+
+  method clienteEspecial() {
+    if(clientesAtendidos % 2 == 0) {
+      
+      game.removeTickEvent("spawnClientes")
+      mesas.forEach({mesa => game.removeVisual(mesa.clienteSentado()) mesa.desocuparMesa()})
+      const clienteEspecial = new ClienteEspecial()
+      game.addVisual(clienteEspecial)
+      clienteEspecial.sentarseEnMesa(mesa3)
+    }
+  }
+
   method mostrarBandeja() {
     if (self.bandeja() !== null) {
       const dialogo = new Dialogo(
@@ -73,8 +109,8 @@ object mozo {
         image = bandeja.imagenDialogo()
       ) // Dura 2 segundos
       dialogo.mostrar()
-    }else{
-        const dialogo = new Dialogo(
+    } else {
+      const dialogo = new Dialogo(
         position = game.at(self.posicionDialogoX(), self.posicionDialogoY()),
         duration = 1000,
         image = "vacioDialogo.png"
@@ -114,12 +150,10 @@ object mozo {
     // Chequea si el plato que quiere el cliente es el mismo que el que tenemos en la bandeja
     if (cliente.plato() == self.bandeja()) {
       puntaje.sumarPuntos(cliente)
-      game.removeTickEvent(
-        "pacienciaCliente/" + cliente.id()
-      )
+      game.removeTickEvent("pacienciaCliente/" + cliente.id())
       cliente.estado(2)
-      cliente.paciencia(cliente.paciencia() + 2500)
       console.println("Plato entregado")
+      cliente.comer()
       game.schedule(
         1000,
         { 
@@ -127,12 +161,13 @@ object mozo {
           return mesa.desocuparMesa()
         }
       )
-    }
-    else{
+      clientesAtendidos += 1
+      self.clienteEspecial()
+    } else {
       puntaje.restarPuntos(cliente)
       console.println("Plato equivocado")
     }
-     self.bandeja(null)
+    self.bandeja(null)
   }
   
   method tomarPedido(cliente) {
@@ -164,46 +199,21 @@ object mozo {
       }
     } else {
       const dialogo = new Dialogo(
-        position = game.at(
-          self.position().x() + 1,
-          self.position().y() + 2
-        ),
+        position = game.at(self.position().x() + 1, self.position().y() + 2),
         duration = 1500,
         image = "dialogoClientesLejo.png"
       )
       dialogo.mostrar()
     }
-
   }
-
-  method perderVida() {
-		if (vidas.size() == 1) {
-			configuracion.terminarJuego()
-		}else{
-      game.removeVisual(vidas.head())
-			vidas.remove(vidas.head())
-    }
-	}
-
-//intento de que el mozo no pase por encima de las mesas
-/*
-  method posicionOcupada() {
-    posicionesOcupadas = mesas.map({mesa=>mesa.position()})   
-  }
-
-
-  method moverse(direccion) {
-    const nuevaPosicion = game.at(self.position().x() + direccion.x(), self.position().y() + direccion.y()) 
-    // Verificar colisiones con las mesas 
-    if (posicionesOcupadas.contains(nuevaPosicion)){ 
-      console.println("Movimiento bloqueado por una mesa")
-    } 
-    else {
-      self.position(nuevaPosicion)
-    }
-   }
- */
   
+  method perderVida() {
+    if (vidas.size() == 1) {
+      configuracion.terminarJuego()
+    } else {
+      const vidaParaEliminar = vidas.findOrDefault({vida1 => vidas.all({vida2 => vida1.position().x() >= vida2.position().x() }) }, null) // Flashbacks de haskell
+      game.removeVisual(vidaParaEliminar)
+      vidas.remove(vidaParaEliminar)
+    }
+  }
 }
-
-

@@ -4,8 +4,12 @@ import platos.*
 import mueblesMapa.*
 
 // Añadir diferentes clientes ej especial, etc
-
-const clientes = ["cliente1uno.png", "cliente2dos.png", "cliente3tres.png", "cliente4cuatro.png"]
+const clientes = [
+  "cliente1uno.png",
+  "cliente2dos.png",
+  "cliente3tres.png",
+  "cliente4cuatro.png"
+]
 
 class Cliente {
   var property id = 0.randomUpTo(200000000).truncate(0)
@@ -18,18 +22,74 @@ class Cliente {
   // 1 -> Esperando plato de comida
   // 2 -> Comiendo
   var property estado = 0
+  const property image = clientes.anyOne()
   
   method sentarseEnMesa(mesa) {
-    position = game.at(mesa.position().x(), mesa.position().y()+1)
+    position = game.at(mesa.position().x(), mesa.position().y() + 1)
     mesa.ocuparMesa(self)
   }
+  
+  method comer() {
     
-  const property image = clientes.anyOne()
+  }
+
+  method agradecer(){
+
+  }
 }
+
+class ClienteEspecial inherits Cliente (
+  id = 0.randomUpTo(200000000).truncate(0),
+  image = "clienteSpe.png",
+  paciencia = 15000,
+  plato = pasta,
+  estado = 0
+) {
+  override method sentarseEnMesa(_) {
+    position = game.at(mesa3.position().x(), mesa3.position().y() + 1)
+    mesa3.ocuparMesa(self)
+  }
+  
+  override method comer() {
+    if (mozo.vidas().size() < 3) {
+      const posicionVidaTop = mozo.vidas().get(0).position()
+      const nuevaVida = new Estrella(
+        position = game.at(posicionVidaTop.x() + 1, 14)
+      )
+      mozo.vidas().add(nuevaVida)
+      mozo.vidas(mozo.vidas().reverse())
+      game.addVisual(nuevaVida)
+    }
+    spawnerClientes.comenzar()
+    return
+  }
+
+  override method agradecer(){
+
+  }
+}
+
+class ClienteEstricto inherits Cliente(
+  id = 0.randomUpTo(200000000).truncate(0),
+  image = "clienteSpe.png",
+  paciencia = 15000,
+  plato = pasta,
+  estado = 0){
+  
+  override method sentarseEnMesa(_) {
+    position = game.at(mesa1.position().x(), mesa1.position().y() + 1)
+    mesa1.ocuparMesa(self)
+  }
+
+  override method agradecer(){
+    c
+  }
+
+  }
+
 
 object spawnerClientes {
   method pacienciaHandler(cliente, mesa, estado) {
-
     const dialogo = new Dialogo(
       position = game.at(
         cliente.position().x() + 0.5,
@@ -55,7 +115,6 @@ object spawnerClientes {
         return self.pacienciaHandler(cliente, mesa, estado + 1)
       }
     )
-    
   }
   
   method comenzar() {
@@ -75,8 +134,22 @@ object spawnerClientes {
           
           
           
+          
+          
+          
+          
+          
+          
+          
           game.addVisual(cliente)
           // Este onTick se encarga de eliminar al cliente y desocupar la mesa cuando se le acaba la paciencia    
+          
+          
+          
+          
+          
+          
+          
           
           
           
