@@ -102,13 +102,26 @@ object mozo {
   }
 
   method clienteEspecial() {
-    if(clientesAtendidos % 2 == 0) {
+    if(clientesAtendidos % 7 == 0) {
       game.removeTickEvent("spawnClientes")
-      mesas.forEach({mesa => self.liberarMesas(mesa)})
+      //mesas.forEach({mesa => self.liberarMesas(mesa)})
+      self.liberarMesas(mesa3)
       const clienteEspecial = new ClienteEspecial()
       game.addVisual(clienteEspecial)
       clienteEspecial.sentarseEnMesa(mesa3)
       spawnerClientes.pacienciaHandler(clienteEspecial, mesa3, 0)
+    }
+  }
+
+    method clienteEstricto() {
+    if(clientesAtendidos % 5 == 0) {
+      game.removeTickEvent("spawnClientes")
+      //mesas.forEach({mesa => self.liberarMesas(mesa)})
+      self.liberarMesas(mesa1)
+      const clienteEstricto = new ClienteEstricto()
+      game.addVisual(clienteEstricto)
+      clienteEstricto.sentarseEnMesa(mesa1)
+      spawnerClientes.pacienciaHandler(clienteEstricto, mesa1, 0)
     }
   }
 
@@ -176,6 +189,8 @@ object mozo {
       )
       clientesAtendidos += 1
       self.clienteEspecial()
+      self.clienteEstricto()
+
     } else {
       puntaje.restarPuntos(cliente)
       console.println("Plato equivocado")
