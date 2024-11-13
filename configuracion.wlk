@@ -49,6 +49,7 @@ object configuracion {
 
 	method terminarJuego() {
     	game.removeTickEvent("spawnClientes")
+		game.clear()
     	game.addVisual(gameOver)
 	}
 
