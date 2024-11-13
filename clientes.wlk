@@ -23,6 +23,11 @@ class Cliente {
   // 2 -> Comiendo
   var property estado = 0
   const property image = clientes.anyOne()
+  var property emocion = null
+  
+  method posicionDialogoX() = self.position().x() - 2
+  
+  method posicionDialogoY() = self.position().y() + 2
   
   method sentarseEnMesa(mesa) {
     position = game.at(mesa.position().x(), mesa.position().y() + 1)
@@ -32,9 +37,14 @@ class Cliente {
   method comer() {
     
   }
-
-  method agradecer(){
-
+  
+  method agradecer() {
+    const dialogo = new Dialogo(
+      position = game.at(self.posicionDialogoX(), self.posicionDialogoY()),
+      duration = 1000,
+      image = "graciasMensaje.png"
+    )
+    dialogo.mostrar()
   }
 }
 
@@ -63,30 +73,24 @@ class ClienteEspecial inherits Cliente (
     spawnerClientes.comenzar()
     return
   }
-
-  override method agradecer(){
-
+  
+  override method agradecer() {
+    
   }
 }
 
-class ClienteEstricto inherits Cliente(
+class ClienteEstricto inherits Cliente (
   id = 0.randomUpTo(200000000).truncate(0),
   image = "clienteSpe.png",
   paciencia = 15000,
   plato = pasta,
-  estado = 0){
-  
+  estado = 0
+) {
   override method sentarseEnMesa(_) {
     position = game.at(mesa1.position().x(), mesa1.position().y() + 1)
     mesa1.ocuparMesa(self)
   }
-
-  override method agradecer(){
-    c
-  }
-
-  }
-
+}
 
 object spawnerClientes {
   method pacienciaHandler(cliente, mesa, estado) {
@@ -102,18 +106,22 @@ object spawnerClientes {
         if (estado == 1) "esperando1.png" else "enojado1.png"
       }
     )
+    cliente.emocion(dialogo)
     dialogo.mostrar()
-    game.schedule(
+    game.onTick(
       (cliente.paciencia() / 3).truncate(0),
-      { 
-        if (estado == 4) {
+      "pacienciaCliente/" + cliente.id(),
+      { if (estado == 4) {
           mesa.desocuparMesa()
           mozo.perderVida()
+          cliente.emocion(null)
           dialogo.eliminar()
           return game.removeVisual(cliente)
-        }
-        return self.pacienciaHandler(cliente, mesa, estado + 1)
-      }
+        } else {
+          cliente.emocion(null)
+          dialogo.eliminar()
+          return self.pacienciaHandler(cliente, mesa, estado + 1)
+        } }
     )
   }
   
@@ -141,8 +149,10 @@ object spawnerClientes {
           
           
           
+          
           game.addVisual(cliente)
           // Este onTick se encarga de eliminar al cliente y desocupar la mesa cuando se le acaba la paciencia    
+          
           
           
           
