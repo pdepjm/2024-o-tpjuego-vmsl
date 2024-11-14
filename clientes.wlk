@@ -94,7 +94,7 @@ class ClienteEspecial inherits Cliente (
 
 class ClienteEstricto inherits Cliente (
   id = 0.randomUpTo(200000000).truncate(0),
-  image = "clienteSpe.png",
+  image = "clienteEstr.png",
   paciencia = 15000,
   plato = pasta,
   estado = 0
