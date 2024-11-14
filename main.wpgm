@@ -1,16 +1,15 @@
 import wollok.game.*
+import clientes.*
+import configuracion.*
+import platos.*
+import mozo.*
 
-import pepita.*
 
-program PepitaGame {
-	game.title("Pepita")
-	game.height(10)
-	game.width(10)
-	game.cellSize(100)
-
-	game.addVisual(pepita)
-
-	keyboard.w().onPressDo({ pepita.fly(1) })
-
+program RestauranteGame {
+	configuracion.setGeneral()
+	configuracion.setKeyboard()
+	configuracion.setVisuals()
+	spawnerClientes.comenzar()
+	/* Spawn de clientes en la posicion de la mesa si es que hay disponibles */
 	game.start()
 }
