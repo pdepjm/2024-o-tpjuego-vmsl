@@ -54,7 +54,7 @@ class Cliente {
     dialogo.mostrar()
   }
 }
-//cambiarlo abajo imagen muchas gracias
+
 
 class ClienteEspecial inherits Cliente (
   id = 0.randomUpTo(200000000).truncate(0),
