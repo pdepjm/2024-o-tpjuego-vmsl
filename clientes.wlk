@@ -19,7 +19,7 @@ const clientes = [
 class Cliente {
   var property id = 0.randomUpTo(200000000).truncate(0)
   var property position = game.at(0, 0)
-  var property paciencia = 20000.randomUpTo(30000).truncate(0)
+  var property paciencia = 35000.randomUpTo(45000).truncate(0)
   //agrego esto para probar metodos de agarrar y entregar
   var property plato = pasta
   // Estados:
@@ -63,10 +63,11 @@ class ClienteEspecial inherits Cliente (
   plato = pasta,
   estado = 0
 ) {
-  override method sentarseEnMesa(_) {
+  /*
+  override method sentarseEnMesa(_) 
     position = game.at(mesa3.position().x(), mesa3.position().y() + 1)
     mesa3.ocuparMesa(self)
-  }
+  }*/
   
   override method comer() {
     if (vida.vidas().size() < 3) {
@@ -99,10 +100,11 @@ class ClienteEstricto inherits Cliente (
   plato = pasta,
   estado = 0
 ) {
+  /*
   override method sentarseEnMesa(_) {
     position = game.at(mesa1.position().x(), mesa1.position().y() + 1)
     mesa1.ocuparMesa(self)
-  }
+  }*/
   
   override method agradecer() {
     const dialogo = new Dialogo(
@@ -163,37 +165,11 @@ object spawnerClientes {
           const mesa = mesasDisponibles.head()
           const cliente = new Cliente()
           cliente.sentarseEnMesa(mesa)
-          // Crea un objeto nuevo de cliente y le asigna una mesa de las disponibles 
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
+          // Crea un objeto nuevo de cliente y le asigna una mesa de las disponibles           
           
           game.addVisual(cliente)
           // Este onTick se encarga de eliminar al cliente y desocupar la mesa cuando se le acaba la paciencia    
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
+  
           self.pacienciaHandler(cliente, mesa, 0)
         }
       }

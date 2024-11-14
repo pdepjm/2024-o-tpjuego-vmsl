@@ -52,6 +52,7 @@ object configuracion {
     	game.removeTickEvent("spawnClientes")
 		game.clear()
     	game.addVisual(gameOver)
+		game.addVisual(puntaje)
 	}
 
 }

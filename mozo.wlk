@@ -38,7 +38,7 @@ object mozo {
   }
 
   method clienteEspecial() {
-    if(clientesAtendidos % 7 == 0) {
+    if(clientesAtendidos % 4 == 0) {
       game.removeTickEvent("spawnClientes")
       //mesas.forEach({mesa => self.liberarMesas(mesa)})
       self.liberarMesas(mesa3)
