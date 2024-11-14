@@ -49,11 +49,12 @@ class Cliente {
     const dialogo = new Dialogo(
       position = game.at(self.posicionDialogoX(), self.posicionDialogoY()),
       duration = 1000,
-      image = "mensajeGracias.png"
+      image = "mensajeGracias.png" 
     )
     dialogo.mostrar()
   }
 }
+//cambiarlo abajo imagen muchas gracias
 
 class ClienteEspecial inherits Cliente (
   id = 0.randomUpTo(200000000).truncate(0),
@@ -85,7 +86,7 @@ class ClienteEspecial inherits Cliente (
         const dialogo = new Dialogo(
       position = game.at(self.posicionDialogoX(), self.posicionDialogoY()),
       duration = 1000,
-      image = "mgMens.png"
+      image = "mensajeMuchasGracias.png"
     )
     dialogo.mostrar()
   }
