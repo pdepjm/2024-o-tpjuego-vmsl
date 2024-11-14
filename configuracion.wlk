@@ -1,3 +1,4 @@
+import vidasYpuntos.*
 import clientes.*
 import mueblesMapa.*
 import mozo.*
@@ -20,7 +21,7 @@ object configuracion {
 		game.boardGround("fondo.jpg")
 		game.addVisual(puntaje)
 		mesas.forEach({ mesa => game.addVisual(mesa) })
-		mozo.vidas().forEach({ vida => game.addVisual(vida) })
+		vida.vidas().forEach({ vida => game.addVisual(vida) })
 		comidas.forEach({plato => game.addVisual(plato)})
 
 		rellenos.forEach({relleno => game.addVisual(relleno)})

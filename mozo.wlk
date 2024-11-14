@@ -1,97 +1,33 @@
+import posicionesYdistancias.*
 import configuracion.*
 import platos.*
 import clientes.*
 import mueblesMapa.*
+import vidasYpuntos.*
+import dialogos.*
 
-const dialogos = []
 
-class Dialogo {
-  const position
-  const duration
-  const text = ""
-  const image
-  
-  method position() = position
-  
-  method text() = text
-  
-  method image() = image
-  
-  method mostrar() {
-    game.addVisual(self)
-    dialogos.add(self)
-    console.println(dialogos)
-    game.schedule(duration, { game.removeVisual(self) dialogos.remove(self) })
-  }
-  
-  method eliminar() {
-    game.removeVisual(self)
-  }
-}
-
-object puntaje {
-  var property puntaje = 0
-  //var property image = 0
-  const property position = game.at(0, 14)
-  
-  method cambiarPuntaje(nuevoPuntaje) {
-    puntaje += nuevoPuntaje
-  }
-  
-  method text() = puntaje.toString()
-  //method fontSize() = 24
-  method textColor() = "FFFFFFFF"
-  
-  //de esta forma, puede que distintos nombres de metodos a llamar
-  method sumarPuntos(cliente) {
-    self.cambiarPuntaje(cliente.plato().puntaje() * cliente.multiplicador())
-  }
-  
-  method restarPuntos(cliente) {
-    self.cambiarPuntaje(-1000)
-  }
-}
-
-class Estrella {
-  var property image = "estrella.png"
-  var property position
-}
 
 object mozo {
   var property bandeja = null
   var property position = game.at(1, 3)
-  var property vidas = [
-    new Estrella(position = game.at(29, 14)),
-    new Estrella(position = game.at(28, 14)),
-    new Estrella(position = game.at(27, 14))
-  ]
+
   var property clientesAtendidos = 0
-  //var property posicionesOcupadas = [] //intento de que el mozo no pase por encima de las mesas
+
   method image() = "imagenMozo.png"
   
   method posicionDialogoX() = self.position().x() + 1
-  
   method posicionDialogoY() = self.position().y() + 2
-  
-  /*
-  var property position = game.at(1, 3)
-  const minX = 0
-  const minY = 0
-  const maxX = game.width() - 1
-  const maxY = game.height() - 1
 
-  method move(dx, dy) {
-    const newX = position.x() + dx
-    const newY = position.y() + dy
 
-    if (newX >= minX && newX <= maxX) {
-      position = position.x(newX)
+  method moverse(direccion) {
+    if (distancia.dentroDeLimites(direccion)){
+      self.position(direccion)
     }
-    if (newY >= minY && newY <= maxY) {
-      position = position.y(newY)
-    }
-  }
-*/
+    else { 
+      console.println("Movimiento bloqueado")
+    } 
+   }
 
   method liberarMesas(mesa) {
     if(mesa.clienteSentado() !== null){
@@ -143,14 +79,10 @@ object mozo {
     }
   }
   
-  method platoCercano() = comidas.findOrElse(
-    { plato => self.position().distance(plato.position()) <= 1 },
-    { null }
-  )
   
   method agarrar() {
-    const plato = self.platoCercano()
-    if (self.platoCercano() !== null) {
+    const plato = distancia.platoCercano()
+    if (plato !== null) {
       bandeja = plato
       self.mostrarBandeja()
     } else {
@@ -163,12 +95,6 @@ object mozo {
     }
   }
   
-  method mesaCercana() = mesas.findOrElse(
-    { mesa => mesa.estaOcupada() && (self.position().distance(
-        mesa.position()
-      ) <= 2) },
-    { null }
-  ) // Hacer mas declarativa esta funcion
   
   method entregarPlato(cliente, mesa) {
     // Chequea si el plato que quiere el cliente es el mismo que el que tenemos en la bandeja
@@ -215,15 +141,15 @@ object mozo {
   
   method interactuarConCliente() {
     // Chequea que tengamos un cliente cerca
-    if (self.mesaCercana() !== null) {
-      const clienteCercano = self.mesaCercana().clienteSentado()
+    if (distancia.mesaCercana() !== null) {
+      const clienteCercano = distancia.mesaCercana().clienteSentado()
       // El cliente esta esperando que le tomen el pedido
       if (clienteCercano.estado() == 0) {
         self.tomarPedido(clienteCercano)
       } else {
         if ((clienteCercano.estado() == 1) && (self.bandeja() !== null))
           // El cliente esta esperando que le tomen el pedido
-          self.entregarPlato(clienteCercano, self.mesaCercana())
+          self.entregarPlato(clienteCercano, distancia.mesaCercana())
       }
     } else {
       const dialogo = new Dialogo(
@@ -234,27 +160,5 @@ object mozo {
       dialogo.mostrar()
     }
   }
-  
-  method perderVida() {
-    if (vidas.size() == 1) {
-    configuracion.terminarJuego()
-    } else {
-      const vidaParaEliminar = vidas.findOrDefault({vida1 => vidas.all({vida2 => vida1.position().x() >= vida2.position().x() }) }, null) // Flashbacks de haskell
-      game.removeVisual(vidaParaEliminar)
-      vidas.remove(vidaParaEliminar)
-    }
-  }
 
-// Verifica movimiento dentro de los limites del juego
-method dentroDeLimites(direccion) = direccion.x() >= 1 && direccion.x() < game.width() - 1 
-                                && direccion.y() >= 1 && direccion.y() < game.height() - 1
-
-  method moverse(direccion) {
-    if (self.dentroDeLimites(direccion)){
-      self.position(direccion)
-    }
-    else { 
-      console.println("Movimiento bloqueado por una mesa")
-    } 
-   }
 }

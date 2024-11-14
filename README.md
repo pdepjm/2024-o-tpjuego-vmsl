@@ -23,6 +23,8 @@ https://lucid.app/lucidchart/b44f4841-ae99-46be-a7ee-56ef28c11418/edit?viewport_
 3.	**Busca los platos:** Usa la tecla "E" para colocar el plato deseado en tu bandeja.
 4.	**Servir a los clientes:** Una vez que tengas el plato correcto, acércate al cliente nuevamente y presiona F para entregárselo.
 5.	**Puntaje:** Ganas puntos al entregar platos correctamente y a tiempo. Pierdes puntos si el plato es incorrecto o si los clientes pierden la paciencia y se van.
+6.	**Vidas:** Si un cliente pierde la paciencia y se va, te restara una vida. Cuidado solo tenes 3!!!
+7.	**Clientes:** Hay tres tipos de clientes: normales, estrictos (dan y quitan mas puntos) y especiales (pueden devolverte una vida si cumplis con el pedido). Los podes diferenciar por su aspecto, los estrictos tienen traje negro y los especiales traje violeta.
 
 
 ## Controles:

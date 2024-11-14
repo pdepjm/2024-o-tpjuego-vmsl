@@ -2,6 +2,8 @@ import mozo.*
 import wollok.game.*
 import platos.*
 import mueblesMapa.*
+import vidasYpuntos.*
+import dialogos.*
 
 // Añadir diferentes clientes ej especial, etc
 const clientes = [
@@ -11,7 +13,7 @@ const clientes = [
   "cliente4cuatro.png"
 ]
 
-const reaccion = ["mensajeGracias.png", "mgMens.png", "mensajeYaEraHora.png"]
+
 
 //1 es ya era hora
 class Cliente {
@@ -66,12 +68,12 @@ class ClienteEspecial inherits Cliente (
   }
   
   override method comer() {
-    if (mozo.vidas().size() < 3) {
-      const posicionVidaTop = mozo.vidas().get(0).position()
+    if (vida.vidas().size() < 3) {
+      const posicionVidaTop = vida.vidas().get(0).position()
       const nuevaVida = new Estrella(
         position = game.at(posicionVidaTop.x() + 1, 14)
       )
-      mozo.vidas().add(nuevaVida) //mozo.vidas(mozo.vidas().reverse())
+      vida.vidas().add(nuevaVida) //mozo.vidas(mozo.vidas().reverse())
       
       game.addVisual(nuevaVida)
     }
@@ -138,7 +140,7 @@ object spawnerClientes {
       (("pacienciaCliente/" + cliente.estado()) + "/") + cliente.id(),
       { if (estado == 4) {
           mesa.desocuparMesa()
-          mozo.perderVida()
+          vida.perderVida()
           dialogo.eliminar()
           game.removeVisual(cliente)
         } else {

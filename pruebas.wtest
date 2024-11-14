@@ -4,7 +4,7 @@ import platos.*
 import mueblesMapa.*
 import configuracion.*
 import main.*
-
+import vidasYpuntos.*
 describe "test de comportamiento basico" {
   method initialize() {
     game.clear()
@@ -68,10 +68,10 @@ describe "test de comportamiento basico" {
     
     
     mesa.desocuparMesa()
-    mozo.perderVida()
+    vida.perderVida()
     game.removeVisual(cliente)
     // Verificar que el cliente fue eliminado y se perdió una vida
     
-    assert.equals(2, mozo.vidas().size())
+    assert.equals(2, vida.vidas().size())
   }
 }
